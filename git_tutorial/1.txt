@@ -6,3 +6,5 @@
    -->git add ./git add filename
 4.Then files are ready to commited.
    -->git commit -m "message"
+5.How to create a new branch?
+  -->git branch branch_name
