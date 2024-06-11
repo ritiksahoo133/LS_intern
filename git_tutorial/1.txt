@@ -16,4 +16,7 @@
   -->git checkout master
   -->git merge development
 
+9.pull all changes from a remote repository into the branch
+  -->git pull origin
 
+  
