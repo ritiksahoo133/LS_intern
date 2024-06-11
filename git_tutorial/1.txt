@@ -8,3 +8,7 @@
    -->git commit -m "message"
 5.How to create a new branch?
   -->git branch branch_name
+6.How to checkout a branch?
+  -->git checkout branch_name
+
+
