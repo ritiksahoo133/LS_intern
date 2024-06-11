@@ -2,3 +2,5 @@
    -->git config user.name
    -->git config user.email
 2.How to initialize git--->git init
+3.Add them to the staging environment
+   -->git add ./git add filename
