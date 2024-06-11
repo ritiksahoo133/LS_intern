@@ -9,6 +9,8 @@ var length = 16; //Number
 var lastName = "johnson"; //String
 var x = {name:"Ritik",age:23}; //Object
 
-
+//when adding a number and string,js will treat number as a string
+var data = 3 + "3";
+console.log(data);
 
 
