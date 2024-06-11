@@ -1,0 +1,4 @@
+1.first git know who you are and this is important for version control system   
+   -->git config user.name
+   -->git config user.email
+   
