@@ -12,6 +12,8 @@
   -->git checkout branch_name
 7.used to check out a branch
    -->git checkout branch_name
-8.
+8.Merge Branches
+  -->git checkout master
+  -->git merge development
 
 
