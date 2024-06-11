@@ -4,3 +4,5 @@
 2.How to initialize git--->git init
 3.Add them to the staging environment
    -->git add ./git add filename
+4.Then files are ready to commited.
+   -->git commit -m "message"
