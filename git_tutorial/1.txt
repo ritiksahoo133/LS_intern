@@ -19,4 +19,8 @@
 9.pull all changes from a remote repository into the branch
   -->git pull origin
 
+10.push changes to remote origin
+  -->git push origin
   
+
+
