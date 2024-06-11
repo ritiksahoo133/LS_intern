@@ -10,5 +10,7 @@
   -->git branch branch_name
 6.How to checkout a branch?
   -->git checkout branch_name
+7.used to check out a branch
+   -->git checkout branch_name
 
 
