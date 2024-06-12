@@ -19,8 +19,17 @@
             console.log(bike['type']);
             var fname = "Ritik";
             var lname = "sahoo";
-            document.getElementById('demo').innerHTML = fname+" "+lname;
-            
+            document.getElementById('demo').innerHTML = fname + " " + lname;
+            var person = {
+                  fname: "Ritik",
+                  lname: "sahoo",
+                  id: 5000,
+                  fullName: function () {
+                        return this.fname + " " + this.lname
+                  }
+            }
+            console.log(person.fullName());
+
       </script>
 </body>
 
