@@ -27,6 +27,7 @@ console.log(x5,x6);
 
 var p1= {name:"pratik",age:23,designation:"Frontend"}
 console.log(p1['name']);
+console.log(typeof []);
 
 
 
