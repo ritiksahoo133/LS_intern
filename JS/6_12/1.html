@@ -1,19 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Document</title>
 </head>
+
 <body>
+      <p id="demo"></p>
       <script>
-            var bike={
-                  type:'Honda',
-                  model:500,
-                  price:90000
+            var bike = {
+                  type: 'Honda',
+                  model: 500,
+                  price: 90000
             }
             console.log(bike.model);
             console.log(bike['type']);
+            var fname = "Ritik";
+            var lname = "sahoo";
+            document.getElementById('demo').innerHTML = fname+" "+lname;
+            
       </script>
 </body>
+
 </html>
