@@ -9,4 +9,5 @@ console.log(car[key]);
 
 fullName = "RitikSahoo";
 console.log(fullName.toUpperCase());
+console.log(fullName.toLowerCase());
 
