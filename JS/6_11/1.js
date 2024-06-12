@@ -7,27 +7,43 @@
 // javascript datatypes
 var length = 16; //Number
 var lastName = "johnson"; //String
-var x = {name:"Ritik",age:23}; //Object
+var x = { name: "Ritik", age: 23 }; //Object
 
 //when adding a number and string,js will treat number as a string
 var data = 3 + "3";
 console.log(data);
 var data2 = "yup" + 3 + 2;
 console.log(data2);
-var data3 = 12+6+"yup";
+var data3 = 12 + 6 + "yup";
 console.log(data3);
 
-var xy=1;
+var xy = 1;
 var x2 = 123e5;
-console.log(xy,x2);
+console.log(xy, x2);
 
-var x5=true;
-var x6=false;
-console.log(x5,x6);
+var x5 = true;
+var x6 = false;
+console.log(x5, x6);
 
-var p1= {name:"pratik",age:23,designation:"Frontend"}
+var p1 = { name: "pratik", age: 23, designation: "Frontend" }
 console.log(p1['name']);
 console.log(typeof []);
 
+var p2 = null;
+// console.log(typeof p2);
 
+console.log(null === undefined);
+console.log(null == undefined);
 
+let p3 = null;
+let p4 = undefined;
+if (!p3) {
+      console.log(p3);
+} else {
+      console.log("hiiii check p3")
+}
+if (!p4) {
+      console.log(p4);
+} else {
+      console.log("hiiii check p4")
+}
