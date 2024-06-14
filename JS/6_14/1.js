@@ -68,16 +68,32 @@ console.log(allHeros);
 console.log(dcHeros instanceof Array);
 
 let arrLength = 10;
-let arr=[];
-arr.length=10;
+let arr = [];
+arr.length = 10;
 let res = arr.fill(0);
 console.log(res);
 array = Array(10).fill(0);
 console.log(array);
-console.log(0.2+0.2);
+console.log(0.2 + 0.2);
 
-let arr2=[1,2,3];
-arr2.unshift();
+let arr2 = [1, 2, 3];
+// arr2.unshift();
+// arr2.splice(2,0,5);
+const arr3=arr2.splice(1, 1, [1, 2])
+console.log(arr3);
+function insertAt(array, index, number) {
+      // array.splice(index,0,number);
+      // array.splice(index,0,number);
+      array.splice(index,3,number)
+      return array;
+
+}
+// console.log(insertAt([1, 2, 3, 4], 2, 10)); // Output: [1, 2, 10, 3, 4]
+// console.log(insertAt([5, 6, 7], 0, 4));    // Output: [4, 5, 6, 7]
+console.log(insertAt([], 0, 1));  //[1]
+
+
+
 
 
 
