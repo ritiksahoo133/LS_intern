@@ -52,7 +52,12 @@ let newArray = ['thor',"Ironman","spiderman"];
 // console.log(newArray.length);
 // console.log(newArray.sort());
 newArray.push(["xyz","abc"]);
-console.log(newArray); 
+console.log(newArray);
+
+// newArray[newArray.length] = "Venom";
+// console.log(newArray);
+
+
 
 
 
