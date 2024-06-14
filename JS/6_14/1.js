@@ -92,6 +92,23 @@ function insertAt(array, index, number) {
 // console.log(insertAt([5, 6, 7], 0, 4));    // Output: [4, 5, 6, 7]
 console.log(insertAt([], 0, 1));  //[1]
 
+const arr5 = ["Banana", "Orange", "Apple", "Mango"];
+const output1=arr5.entries()
+const result8=[]
+for (const [key,value] of output1) {
+      result.push({key:value})
+}
+console.log(result);
+
+function filterEvenIndices(obj){
+      let result9=[];
+      for(let [key,value] of Object.entries(obj)){
+            result9.push([key,value]);
+      }
+      return result9;
+}
+
+console.log(filterEvenIndices({ a: 1, b: 2, c: 3 })); //output [['a', 1], ['b', 2], ['c', 3]]
 
 
 
