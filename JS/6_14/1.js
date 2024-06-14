@@ -8,7 +8,7 @@
 // console.log(Number("10 "));
 
 // // ------parseInt------
-// console.log(parseInt("123"));
+console.log("check data =====>>", typeof parseInt("123"));
 // console.log(parseInt("123hello"));
 // console.log(parseInt("123.45")); //decimal point and everything after it is ignored
 // console.log(parseInt("hello")); //NaN
@@ -57,13 +57,29 @@ console.log(newArray);
 // newArray[newArray.length] = "Venom";
 // console.log(newArray);
 
-dc_heros = ["superman", "flash", "batman"];
-const allHeros = newArray.concat(dc_heros)
+dcHeros = ["superman", "flash", "batman"];
+const allHeros = newArray.concat(dcHeros)
 console.log(allHeros);
 
 // ------isArray------
 // console.log(Array.isArray("Hitesh"));
 // console.log(Array.isArray(["vineet"]));
+
+console.log(dcHeros instanceof Array);
+
+let arrLength = 10;
+let arr=[];
+arr.length=10;
+let res = arr.fill(0);
+console.log(res);
+array = Array(10).fill(0);
+console.log(array);
+console.log(0.2+0.2);
+
+let arr2=[1,2,3];
+arr2.unshift();
+
+
 
 
 
