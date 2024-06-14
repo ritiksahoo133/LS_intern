@@ -20,3 +20,9 @@ console.log(parseInt("hello")); //NaN
 // console.log(parseFloat("10.5 meters"));  
 // console.log(parseFloat("hello"));
 
+// -------Number Properties--------
+// console.log(Number.MAX_VALUE);
+// console.log(Number.MIN_VALUE);
+// console.log(Number.NEGATIVE_INFINITY);
+// console.log(Number.NaN);
+// console.log(Number.POSITIVE_INFINITY);
