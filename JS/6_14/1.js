@@ -5,3 +5,5 @@ console.log(Number(null)); //0
 console.log(Number(undefined)); //NaN
 console.log(Number("hello"));  //NaN
 console.log(Number({}));  //NaN
+console.log(Number("10 "));
+
