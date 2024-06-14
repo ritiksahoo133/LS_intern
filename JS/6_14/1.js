@@ -57,6 +57,12 @@ console.log(newArray);
 // newArray[newArray.length] = "Venom";
 // console.log(newArray);
 
+dc_heros = ["superman","flash","batman"];
+const allHeros=newArray.concat(dc_heros)
+console.log(allHeros);
+
+
+
 
 
 
