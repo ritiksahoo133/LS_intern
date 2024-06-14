@@ -51,6 +51,9 @@ for(let i=0;i<replaceWord.length;i++){
 let newArray = ['thor',"Ironman","spiderman"];
 // console.log(newArray.length);
 // console.log(newArray.sort());
+newArray.push(["xyz","abc"]);
+console.log(newArray); 
+
 
 
 
