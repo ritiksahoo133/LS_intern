@@ -39,27 +39,42 @@ let str = "I am kiran abc kiran abc Ritik xyz"
 let result = []
 let newStr = "";
 
-for(let i=0;i<restrictWord.length;i++){
-      str=str.replaceAll(restrictWord[i],"");
+for (let i = 0; i < restrictWord.length; i++) {
+      str = str.replaceAll(restrictWord[i], "");
 }
 console.log(str);
-for(let i=0;i<replaceWord.length;i++){
-      str=str.replaceAll(replaceWord[i].name,replaceWord[i].newName);
+for (let i = 0; i < replaceWord.length; i++) {
+      str = str.replaceAll(replaceWord[i].name, replaceWord[i].newName);
 }
 // console.log(str);
 
-let newArray = ['thor',"Ironman","spiderman"];
+let newArray = ['thor', "Ironman", "spiderman"];
 // console.log(newArray.length);
 // console.log(newArray.sort());
-newArray.push(["xyz","abc"]);
+newArray.push(["xyz", "abc"]);
 console.log(newArray);
 
 // newArray[newArray.length] = "Venom";
 // console.log(newArray);
 
-dc_heros = ["superman","flash","batman"];
-const allHeros=newArray.concat(dc_heros)
+dc_heros = ["superman", "flash", "batman"];
+const allHeros = newArray.concat(dc_heros)
 console.log(allHeros);
+
+// ------isArray------
+// console.log(Array.isArray("Hitesh"));
+// console.log(Array.isArray(["vineet"]));
+
+
+
+
+
+
+
+
+
+
+
 
 
 
