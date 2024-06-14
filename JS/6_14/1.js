@@ -48,6 +48,8 @@ for(let i=0;i<replaceWord.length;i++){
 }
 // console.log(str);
 
+let newArray = ['thor',"Ironman","spiderman"];
+console.log(newArray.length);
 
 
 
