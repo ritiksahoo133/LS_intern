@@ -14,10 +14,9 @@ const nestedArray = [1, [2, [3, [4]], 5], 6];
 console.log(nestedArray.flat(Infinity));
 
 // Convert an Array to a String
-let numbers = [1, 2, 3, 4, 5];
+let numbers = [1, 2, {a:"123"}, 4, 5];
 // Output: '1,2,3,4,5'
-console.log(numbers.join(','));
-
+console.log("", numbers.toString());
 
 let number = [1, 2, 3, 4, 5];
 // Output: [2, 3, 4]
@@ -29,6 +28,21 @@ let str = 'hello';
 // Output: ['h', 'e', 'l', 'l', 'o']
 console.log(str.split(""));
 
+const uniqueArray = [1,1, 2, 3, 4,2,5];
+console.log("111",uniqueArray.indexOf(6),uniqueArray.findIndex((ele)=>ele>2));
+//find unique value of it's index
+//output:2
+const result = uniqueArray.reduce((acc,curr)=>{
+      if(acc[curr]){
+            acc[curr]+=1;
+      }
+      else{
+            acc[curr]=1;
+            // console.log(acc);
+      }
+      return acc;
+},{})
+console.log(result);
 
 
 
