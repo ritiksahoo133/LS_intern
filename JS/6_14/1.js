@@ -206,13 +206,19 @@ for(let i=0;i<vowels.length;i++){
 // console.log(vowels);
 
 // -----firstIndex-------
-const age = [1,12,8,16,22];
-const result2 = age.findIndex(checkAge);
-function checkAge(ages){
-      return ages>15;
-}
+// const age = [1,12,8,16,22];
+// const result2 = age.findIndex(checkAge);
+// function checkAge(ages){
+//       return ages>15;
+// }
+// console.log(result2);
 
-console.log(result2);
+// let text = "Mr. blue has a blue house";
+// console.log(text.search("blue"));
+
+
+
+
 
 
 
