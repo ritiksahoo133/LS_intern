@@ -201,6 +201,9 @@ for(let i=0;i<vowels.length;i++){
             break;
       }
 }
+// -------fill-------
+// vowels.fill("kiwi",1,4)
+// console.log(vowels);
 
 
 
