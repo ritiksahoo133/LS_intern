@@ -124,3 +124,5 @@ console.log(null || "hello");
 
 // NOT operator
 // console.log(!"Hello");
+console.log("abb" > "ba");
+
