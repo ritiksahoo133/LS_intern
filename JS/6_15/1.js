@@ -80,4 +80,9 @@ if(console.log("Hi")){
 else{
       console.log("Hi");
 }
-
+age=undefined;
+if(age>18)console.log("You are above 18");
+else if(age<18)console.log("you are less than 18");
+else{
+      console.log("Please enter a valid age");
+}
