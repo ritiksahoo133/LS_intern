@@ -113,10 +113,10 @@ for (let i = 0; i < evenNum.length; i++) {
 // ------Logical Operator-------
 let userName = "Ritik";
 let email = "ritiksahoo133@gmail.com";
-if(userName && email){
+if (userName && email) {
       console.log("valid User");
 }
-else{
+else {
       console.log("Not a valid user");
 }
 console.log("" || email);
@@ -125,4 +125,10 @@ console.log(null || "hello");
 // NOT operator
 // console.log(!"Hello");
 console.log("abb" > "ba");
+
+//-----for loop------
+cars = ["BMW", "Volvo", "Saab"]
+for (let i = 0; i < cars.length; i++){
+      console.log(cars[i]);
+}
 
