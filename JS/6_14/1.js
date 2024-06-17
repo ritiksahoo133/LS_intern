@@ -177,7 +177,15 @@ students.sort((a,b)=>{
 console.log(students);
 
 
+const number1 = [5, 7, 2, 4, 7, 8, 10];
+const target = 6;
 
+if(number1.indexOf(target) === -1){
+      console.log("Not Present");
+}
+else{
+      console.log("Present");
+}
 
 
 
