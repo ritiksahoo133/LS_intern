@@ -128,19 +128,26 @@ console.log("abb" > "ba");
 
 //-----for loop------
 cars = ["BMW", "Volvo", "Saab"]
-for (let i = 0; i < cars.length; i++){
+for (let i = 0; i < cars.length; i++) {
       console.log(cars[i]);
 }
-for (let i = 0; i < cars.length; i++){
-      if(cars[i]  === "BMW"){
-            console.log("for-loop break","BMW")
+for (let i = 0; i < cars.length; i++) {
+      if (cars[i] === "BMW") {
+            console.log("for-loop break", "BMW")
             break
       }
 }
 
-let person = {fname:"Ritik",lname:"sahoo",age:23};
-for(let i in person){
-      console.log(i,person[i]);
+let person = { fname: "Ritik", lname: "sahoo", age: 23 };
+for (let i in person) {
+      console.log(i, person[i]);
+}
+let i = 0;
+while (i < 10) {
+      if (i % 2 == 0){
+            console.log(i);
+      }
+      i++
 }
 
 
