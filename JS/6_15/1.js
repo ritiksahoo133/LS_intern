@@ -44,12 +44,15 @@ console.log("111", uniqueArray.indexOf(6), uniqueArray.findIndex((ele) => ele > 
 // },{})
 // console.log(result);
 
-const data11 = [10, 12, 16, 8, 14]
+const data11 = [10, 11, 17, 8, 14]
 function checkEven(num){
       return num  % 2 === 0
 }
 console.log("Every",data11.every(checkEven))
 // returns true if every element in an array pass a function test
+
+console.log("some",data11.some(checkEven));
+
 
 
 
