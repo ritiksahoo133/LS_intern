@@ -119,4 +119,5 @@ if(userName && email){
 else{
       console.log("Not a valid user");
 }
-
+console.log("" || email);
+console.log(null || "hello");
