@@ -51,9 +51,18 @@ function checkEven(num){
 console.log("Every",data11.every(checkEven))
 // returns true if every element in an array pass a function test
 
-console.log("some",data11.some(checkEven));
+console.log("some",data11.some(checkEven))
 
+// ----------Boolean-----------
+// console.log("Boolean",Boolean(100));
+// console.log("Boolean",Boolean(3.14));
+// console.log("Boolean",Boolean(-15));
+// console.log("Any (not empty)string is true",Boolean("Hello"));
+// console.log("Boolean",Boolean('false'));
+// console.log("Zero",Boolean(0));
 
+// Boolean()
+// false=0,"",undefined,null,NaN,false,-0
 
 
 
