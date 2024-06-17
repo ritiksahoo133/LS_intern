@@ -73,4 +73,11 @@ let num1;
 let num2 = 10;
 // console.log("Nullish",num1 ?? null ?? num2)
 
+// if-else condition
+if(console.log("Hi")){
+      console.log("Hello");
+}
+else{
+      console.log("Hi");
+}
 
