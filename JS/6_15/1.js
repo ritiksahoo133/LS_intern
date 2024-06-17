@@ -86,3 +86,19 @@ else if(age<18)console.log("you are less than 18");
 else{
       console.log("Please enter a valid age");
 }
+
+let fruit = 'Apple';
+
+switch (fruit) {
+  case 'Apple':
+    console.log('Apple is red.');
+    break;
+  case 'Banana':
+    console.log('Banana is yellow.');
+    break;
+  case 'Orange':
+    console.log('Orange is orange.');
+    break;
+  default:
+    console.log('Unknown fruit.');
+}
