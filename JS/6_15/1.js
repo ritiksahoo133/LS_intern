@@ -138,3 +138,9 @@ for (let i = 0; i < cars.length; i++){
       }
 }
 
+let person = {fname:"Ritik",lname:"sahoo",age:23};
+for(let i in person){
+      console.log(i,person[i]);
+}
+
+
