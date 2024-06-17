@@ -74,31 +74,39 @@ let num2 = 10;
 // console.log("Nullish",num1 ?? null ?? num2)
 
 // if-else condition
-if(console.log("Hi")){
+if (console.log("Hi")) {
       console.log("Hello");
 }
-else{
+else {
       console.log("Hi");
 }
-age=undefined;
-if(age>18)console.log("You are above 18");
-else if(age<18)console.log("you are less than 18");
-else{
+age = undefined;
+if (age > 18) console.log("You are above 18");
+else if (age < 18) console.log("you are less than 18");
+else {
       console.log("Please enter a valid age");
 }
 
 let fruit = 'Apple';
 
 switch (fruit) {
-  case 'Apple':
-    console.log('Apple is red.');
-    break;
-  case 'Banana':
-    console.log('Banana is yellow.');
-    break;
-  case 'Orange':
-    console.log('Orange is orange.');
-    break;
-  default:
-    console.log('Unknown fruit.');
+      case 'Apple':
+            console.log('Apple is red.');
+            break;
+      case 'Banana':
+            console.log('Banana is yellow.');
+            break;
+      case 'Orange':
+            console.log('Orange is orange.');
+            break;
+      default:
+            console.log('Unknown fruit.');
+}
+
+let evenNum = [1, 2, 3, 5];
+for (let i = 0; i < evenNum.length; i++) {
+      if (evenNum[i] % 2 === 0) {
+            console.log(evenNum[i])
+            break
+      }
 }
