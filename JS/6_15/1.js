@@ -71,6 +71,6 @@ console.log(undefined >= 0);  //false
 // The Nullish Coalescing Operator (??)
 let num1;
 let num2 = 10;
-console.log("Nullish",num1 ?? null ?? num2)
+// console.log("Nullish",num1 ?? null ?? num2)
 
 
