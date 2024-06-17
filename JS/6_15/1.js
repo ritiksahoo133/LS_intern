@@ -110,3 +110,13 @@ for (let i = 0; i < evenNum.length; i++) {
             break
       }
 }
+// ------Logical Operator-------
+let userName = "Ritik";
+let email = "ritiksahoo133@gmail.com";
+if(userName && email){
+      console.log("valid User");
+}
+else{
+      console.log("Not a valid user");
+}
+
