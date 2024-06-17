@@ -136,7 +136,7 @@
 // // console.log(calculateTotalSales(sales));
 
 let data = [1, 6, 1, 7, 3, 5, 7];
-console.log(data.indexOf(1,));
+console.log(data.indexOf(1));
 let answer = data.filter((element, i) => {
       return data.indexOf(element) === i;
 })
@@ -157,35 +157,55 @@ console.log(numbers);
 numbers.sort((a, b) => { return a - b })
 console.log(numbers);
 
-numbers.sort((a,b)=>b-a);
+numbers.sort((a, b) => b - a);
 console.log(numbers);
 
 const fruits = ['Banana', 'Orange', 'Apple', 'Mango'];
-fruits.sort(); 
+fruits.sort();
 console.log(fruits);
-fruits.sort((a,b)=>b.localeCompare(a));
+fruits.sort((a, b) => b.localeCompare(a));
 console.log(fruits);
 
 const students = [
       { name: 'John', age: 20 },
       { name: 'Jane', age: 25 },
       { name: 'Doe', age: 18 }
-  ];
-students.sort((a,b)=>{
-      return a.age-b.age;
+];
+students.sort((a, b) => {
+      return a.age - b.age;
 });
 console.log(students);
-
 
 const number1 = [5, 7, 2, 4, 7, 8, 10];
 const target = 6;
 
-if(number1.indexOf(target) === -1){
+if (number1.indexOf(target) === -1) {
       console.log("Not Present");
 }
-else{
+else {
       console.log("Present");
 }
+console.log(Math.min(...number1));
+
+// ------endsWith---------
+let checkStr = "HellO";
+let vowels = ["a", "e", "i", "o", "u"];
+
+// let lastElement = checkStr.toLowerCase().charAt(checkStr.length-1)
+// const output123 = vowels.includes(lastElement) ? "vowel" : "Not Vowel";
+// console.log(output123);
+
+for(let i=0;i<vowels.length;i++){
+      if(checkStr.toLowerCase().endsWith(vowels[i])){
+            console.log("vowel");
+            break;
+      }
+}
+
+
+
+
+
 
 
 
