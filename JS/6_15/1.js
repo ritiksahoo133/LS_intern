@@ -45,13 +45,13 @@ console.log("111", uniqueArray.indexOf(6), uniqueArray.findIndex((ele) => ele > 
 // console.log(result);
 
 const data11 = [10, 11, 17, 8, 14]
-function checkEven(num){
-      return num  % 2 === 0
+function checkEven(num) {
+      return num % 2 === 0
 }
-console.log("Every",data11.every(checkEven))
+console.log("Every", data11.every(checkEven))
 // returns true if every element in an array pass a function test
 
-console.log("some",data11.some(checkEven))
+console.log("some", data11.some(checkEven))
 
 // ----------Boolean-----------
 // console.log("Boolean",Boolean(100));
@@ -64,6 +64,7 @@ console.log("some",data11.some(checkEven))
 // Boolean()
 // false=0,"",undefined,null,NaN,false,-0
 
-
-
+console.log(null>0);  //false
+console.log(null>=0);  //true
+console.log(undefined>=0);  //false
 
