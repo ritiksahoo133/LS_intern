@@ -64,7 +64,13 @@ console.log("some", data11.some(checkEven))
 // Boolean()
 // false=0,"",undefined,null,NaN,false,-0
 
-console.log(null>0);  //false
-console.log(null>=0);  //true
-console.log(undefined>=0);  //false
+console.log(null > 0);  //false
+console.log(null >= 0);  //true
+console.log(undefined >= 0);  //false
+
+// The Nullish Coalescing Operator (??)
+let num1;
+let num2 = 10;
+console.log("Nullish",num1 ?? null ?? num2)
+
 
