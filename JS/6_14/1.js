@@ -205,6 +205,16 @@ for(let i=0;i<vowels.length;i++){
 // vowels.fill("kiwi",1,4)
 // console.log(vowels);
 
+// -----firstIndex-------
+const age = [1,12,8,16,22];
+const result2 = age.findIndex(checkAge);
+function checkAge(ages){
+      return ages>15;
+}
+
+console.log(result2);
+
+
 
 
 
