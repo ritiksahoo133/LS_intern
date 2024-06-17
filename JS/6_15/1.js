@@ -121,3 +121,6 @@ else{
 }
 console.log("" || email);
 console.log(null || "hello");
+
+// NOT operator
+// console.log(!"Hello");
