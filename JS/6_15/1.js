@@ -131,4 +131,10 @@ cars = ["BMW", "Volvo", "Saab"]
 for (let i = 0; i < cars.length; i++){
       console.log(cars[i]);
 }
+for (let i = 0; i < cars.length; i++){
+      if(cars[i]  === "BMW"){
+            console.log("for-loop break","BMW")
+            break
+      }
+}
 
