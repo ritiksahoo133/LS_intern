@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+      <script>
+            $(document).ready(function () {
+                  $("button").click(function () {
+                        // $("#d1").animate({ bottom: '250px' })
+                        // $("#d1").animate({ bott: '250px' })
+                        $("#d2").animate({ top: '458px' })
+                        $("#d3").animate({ top: '458px' })
+                        $("#d4").animate({ bottom: '80px' })
+                        $("#d5").animate({bottom:"80px"})
+                        
+                  })
+            })
+      </script>
+
+</head>
+
+<body>
+      <div id="container" >
+      <div id="d1" style="background:#98bf21;height:100px;width:100px;position:absolute;margin:250px ;"></div>
+      <div id="d2" style="background:#98bf21;height:100px;width:100px;position:absolute;margin-left: 390px;"></div>
+      <div id="d3" style="background:#98bf21;height:100px;width:100px;position:absolute;margin-left: 100px;"></div>
+      <div id="d4" style="background:#98bf21;height:100px;width:100px;position:absolute;margin:450px 105px  "></div>
+      <div id="d5" style="background:#98bf21;height:100px;width:100px;position:absolute;margin:450px 405px"></div>
+      </div>
+      <button>Start Animation</button>
+</body>
+
+</html>
