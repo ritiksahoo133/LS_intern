@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+      <script>
+            $(document).ready(function () {
+                  $("#test").click(function () {
+                        alert("Text: " + $("#demo").text())
+                  })
+                  $("#html").click(function () {
+                        alert("Html: " + $("#demo").html())
+                  })
+                  $("#value").click(function () {
+                        alert("value: " + $("#data").val())
+                  })
+            })
+      </script>
+</head>
+
+<body>
+      <p id="demo">This is the <b>bold</b> text in paragraph</p>
+      <button id="test">show Text</button>
+      <button id="html">show Html</button>
+      <br>
+      <input type="text" id="data" value="Ritik">
+      <button id="value">show value</button>
+</body>
+
+</html>
