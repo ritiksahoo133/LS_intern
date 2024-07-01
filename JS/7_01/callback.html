@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+      <script>
+            $(document).ready(function(){
+            $("#btn").click(function(){
+                        $("#hide").hide('slow',function(){
+                              alert("The paragraph is hidden now")
+                        })
+                  })
+            })
+      </script>
+</head>
+<body>
+      <button id="btn">Hide content</button>
+      <p id="hide">Hide me!</p>
+</body>
+</html>
