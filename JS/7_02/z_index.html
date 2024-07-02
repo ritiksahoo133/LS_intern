@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+      <style>
+            #myVideo {
+                  position: fixed;
+                  z-index: 0;
+                  right: 0;
+                  bottom: 0;
+                  min-width: 100%;
+                  min-height: 100%;
+            }
+            h1{
+                  position: absolute;
+                  z-index:1;
+                  font-family: 'lobster',cursive;
+                  color: fuchsia;
+            }
+      </style>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+      <script>
+            $(document).ready(function(){
+                  $('video').remove();
+                  $('body').css('background-image','url(./images/hero-bg.jpg)');
+                  $('body').css('background-size','cover');
+            })
+      </script>
+</head>
+
+<body>
+      <video autoplay muted loop id="myVideo">
+            <source src="../7_01/videos/2040063-hd_1920_1080_24fps.mp4" type="video/mp4">
+      </video>
+      <h1>Welcome to the Cherry Blossom Festival</h1>
+</body>
+
+</html>
