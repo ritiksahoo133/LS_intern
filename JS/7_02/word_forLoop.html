@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+      <script>
+            $(document).ready(function () {
+                  for (let i = 1; i < 7; i++) {
+                        $("s" + i).fadeIn(2000 * i)
+                  }
+            })
+      </script>
+</head>
+
+<body>
+      <span id="s1" class="words">Welcome</span>
+      <span id="s2" class="words">To</span>
+      <span id="s3" class="words">the</span>
+      <span id="s4" class="words">Cherry</span>
+      <span id="s5" class="words">Blossom</span>
+      <span id="s6" class="words">Festival</span>
+</body>
+
+</html>

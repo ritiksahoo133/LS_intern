@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+      <script>
+            $(document).ready(function () {
+                  $("button").click(function () {
+                        $("#d1").fadeIn()
+                        $("#d2").fadeIn("slow")
+                        $("#d3").fadeIn(2000)
+                  });
+            })
+      </script>
+</head>
+
+<body>
+      <div id="d1" style="width:80px;height:80px;background-color:red;display: none;"></div>
+      <div id="d2" style="width:80px;height:80px;background-color:rgb(50, 217, 75);display: none;"></div>
+      <div id="d3" style="width:80px;height:80px;background-color:rgb(70, 151, 202);display: none;"></div>
+      <button id="fadein">FadeIn</button>
+</body>
+
+</html>

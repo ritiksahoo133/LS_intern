@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+      <style>
+            .hidden {
+                  display: none;
+            }
+
+            body {
+                  background: url(./images/hero-bg.jpg);
+                  background-size: cover;
+                  background-repeat: no-repeat;
+                  background-attachment: fixed;
+            }
+      </style>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+      <script>
+            function addBackground(event) {
+                  console.log(event.keyCode)
+                  if (event.keyCode === 13) {
+                        $(".demo1").addClass("hidden")
+                        $(".enter").addClass("hidden")
+                        $(".picture").removeClass("hidden")
+                  }
+                  if (event.keyCode === 89) {
+                        $('body').css("background-image", 'url(./images/about.png)');
+                        $(".picture").text("Then have a look at this one")
+                  }
+                  if (event.keyCode === 78) {
+                        $("body").css("background-image", "none")
+                        $("body").css("background-color", "blue")
+                        $(".picture").text("Sorry")
+                  }
+
+            }
+      </script>
+</head>
+
+<body onkeydown="addBackground(event);">
+      <h1 class="demo1 ">welcome to the Most Amazing Places</h1>
+      <h1 class="enter">Press Enter to continue</h1>
+      <h1 class="picture hidden">Do you like this picture?Type Y/N</h1>
+</body>
+
+</html>

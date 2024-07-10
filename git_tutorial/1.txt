@@ -1,0 +1,26 @@
+1.first git know who you are and this is important for version control system   
+   -->git config user.name
+   -->git config user.email
+2.How to initialize git--->git init
+3.Add them to the staging environment
+   -->git add ./git add filename
+4.Then files are ready to commited.
+   -->git commit -m "message"
+5.How to create a new branch?
+  -->git branch branch_name
+6.How to checkout a branch?
+  -->git checkout branch_name
+7.used to check out a branch
+   -->git checkout branch_name
+8.Merge Branches
+  -->git checkout master
+  -->git merge development
+
+9.pull all changes from a remote repository into the branch
+  -->git pull origin
+
+10.push changes to remote origin
+  -->git push origin
+  
+
+

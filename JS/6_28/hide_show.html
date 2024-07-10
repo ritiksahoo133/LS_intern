@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+</head>
+
+<body>
+      <h2>jQuery is a Javascript Library,Write Less,Do more</h2>
+      <button id="hide">Hide</button>
+      <button id="show">Show</button>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+      <script>
+            $(document).ready(function () {
+                  $("#show").click(function () {
+                        $("h2").show(1000)
+                  });
+                  $("#hide").click(function () {
+                        $("h2").hide(1000)
+                  })
+            })
+      </script>
+</body>
+
+</html>

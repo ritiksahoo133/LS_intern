@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+      <style>
+            .hidden {
+                  display: none;
+            }
+
+            body {
+                  background: url(./images/hero-bg.jpg);
+                  background-size: cover;
+                  background-repeat: no-repeat;
+                  background-attachment: fixed;
+            }
+
+            h1 {
+                  color: white;
+                  text-align: center;
+                  font-size: 50px;
+
+            }
+      </style>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+      <script>
+            function addBackground(event){
+                  if(event.keyCode == 13){
+                        $('.welcome-screen').fadeOut(3000);
+                        $('.main').fadeIn(5000)
+                  }
+                  
+            }
+      </script>
+</head>
+
+<body onkeydown="addBackground(event)">
+      <section class="welcome-screen">
+            <h1>Welcome to the Most Amazing Places</h1>
+            <h1>Press Enter to continue</h1>
+      </section>
+      <div class="main hidden">
+            <h1>Do you like this picture?Type Y/N</h1>
+      </div>
+</body>
+
+</html>

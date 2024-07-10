@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+</head>
+
+<body>
+      <p id="demo"></p>
+      <p id="demo1"></p>
+      <button onclick="document.getElementById('demo1').innerHTML=Date()">The time is?</button>
+      <button onclick="this.style.fontSize='35px'">Content</button>
+      <script>
+            var bike = {
+                  type: 'Honda',
+                  model: 500,
+                  price: 90000
+            }
+            console.log(bike.model);
+            console.log(bike['type']);
+            var fname = "Ritik";
+            var lname = "sahoo";
+            document.getElementById('demo').innerHTML = fname + " " + lname;
+            var person = {
+                  fname: "Ritik",
+                  lname: "sahoo",
+                  id: 5000,
+                  fullName: function () {
+                        return this.fname + " " + this.lname
+                  }
+            }
+            person.fname = "ritik";
+            console.log(person.fullName());
+            const regulaUser = {
+                  email: "ritik133@gmail.com",
+                  fullname: {
+                        userfullname: {
+                              firstname: "ritik",
+                              lastname: "sahoo"
+                        }
+                  }
+            }
+            console.log(regulaUser.fullname.userfullname.firstname);
+            const obj1 = { 1: "a", 2: "b" }
+            const obj2 = { 3: "c", 4: "d" }
+            const obj3 = { 5: "e", 6: "f" }
+
+            const obj4 = Object.assign(obj1,obj2,obj3) //returns target object
+            console.log(obj4);
+            console.log({...obj1,...obj2});
+            if(obj1.hasOwnProperty(6)) console.log("correct");
+            else console.log("incorrect");
+// ----------function----------
+function myFunc(){
+     var mobName = "samsung";
+}
+myFunc();
+// ------------Event Handling-----------
+
+      </script>
+</body>
+
+</html>
