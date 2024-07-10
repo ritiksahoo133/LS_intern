@@ -398,22 +398,45 @@ const arrayData = [
 // );
 // console.log(result);
 
-let keys = [];
-let clicks = [];
-let impressions = [];
-let ctr = [];
-let position = [];
-const result = arrayData.reduce((acc, curr) => {
-  keys.push(curr.keys[0]);
-  clicks.push(curr.clicks);
-  impressions.push(curr.impressions);
-  ctr.push(curr.ctr);
-  position.push(curr.position);
-});
-console.log({
-  keys: keys,
-  clicks: clicks,
-  impressions: impressions,
-  ctr: ctr,
-  position: position,
-});
+// let keys = [];
+// let clicks = [];
+// let impressions = [];
+// let ctr = [];
+// let position = [];
+// const result = arrayData.reduce((acc, curr) => {
+//   keys.push(curr.keys[0]);
+//   clicks.push(curr.clicks);
+//   impressions.push(curr.impressions);
+//   ctr.push(curr.ctr);
+//   position.push(curr.position);
+// });
+// console.log({
+//   keys: keys,
+//   clicks: clicks,
+//   impressions: impressions,
+//   ctr: ctr,
+//   position: position,
+// });
+
+// const result = arrayData.reduce((acc, curr) => {
+//   Object.keys(curr).forEach((key) => {
+//     const currItem = Array.isArray(curr[key]) ? [...curr[key]] : [curr[key]];
+//     const accItem = Array.isArray(acc[key]) ? [...acc[key]] : [acc[key]];
+//     acc[key] = [...accItem, ...currItem];
+//   });
+//   return acc;
+// }, {});
+// console.log(result);
+
+const arr = [
+  [1, 2, 3],
+  [4, 5],
+  [6, 7, 8],
+  [9, 10, 11],
+];
+// let flatArr = [];
+const result = arr.reduce((acc, curr) => {
+  acc.push(...curr);
+  return acc;
+}, []);
+console.log(result);
