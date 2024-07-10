@@ -431,12 +431,38 @@ const arrayData = [
 const arr = [
   [1, 2, 3],
   [4, 5],
-  [6, 7, 8],
-  [9, 10, 11],
+  [6, [7, 8], 9],
+  19,
+  [[10], 11],
+  [12, [13, [14], 15]],
 ];
 // let flatArr = [];
-const result = arr.reduce((acc, curr) => {
-  acc.push(...curr);
-  return acc;
-}, []);
-console.log(result);
+// const result = arr.reduce((acc, curr) => {
+//   acc.push(...curr);
+//   return acc;
+// }, []);
+// console.log(result);
+
+function flattenedArrayFunction(arr) {
+  const result = arr.reduce((acc, curr) => {
+    if (Array.isArray(curr)) {
+      acc.push(...flattenedArrayFunction(curr));
+    } else {
+      acc.push(curr);
+    }
+    return acc;
+  }, []);
+  return result;
+}
+
+let flattenedArray = [
+  [1, 2, 3],
+  [4, 5],
+  [6, [7, 8], 9],
+  [9, [10], 11],
+  16,
+  [(12, [13, [14], 15])],
+  17,
+];
+
+console.log(flattenedArrayFunction(flattenedArray));
