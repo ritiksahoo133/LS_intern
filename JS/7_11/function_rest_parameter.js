@@ -16,9 +16,17 @@ function findMax() {
   }
   return max;
 }
-x = findMax(1, 123, 500, 115, 44, 88);
+// x = findMax(1, 123, 500, 115, 44, 88);
 
 // console.log(x);
 
 const [first, ...second] = [1, 2, 3, 4, 5];
 // console.log(first, second);
+
+const x = [1, 2, 3, 4, 5, 6];
+const [y, z] = x;
+// console.log(y, z);
+
+const obj = { a: 1, b: 2 };
+const { a, b } = obj;
+console.log(a, b);
