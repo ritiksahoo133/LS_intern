@@ -17,7 +17,7 @@
           sans-serif;
         color: rgb(248, 239, 239);
       }
-      img {
+      .userImage {
         border-radius: 50px;
         border: 1px solid;
         height: 45px;
@@ -72,7 +72,7 @@
         cursor: pointer;
       } */
       .messageBox {
-        background-color: rgb(60, 59, 58);
+        background-color: rgb(72, 72, 71);
         overflow: hidden;
       }
       .messages {
@@ -112,7 +112,15 @@
         padding-left: 10px;
         background-color: #4b614b;
         border:1px solid;
-        margin-right: 3px;
+      
+      }
+      .chatImg{
+        width:45px
+      }
+      .sendButton{
+        width:40px;
+        height:36px;
+        padding-right: 8px;
       }
     </style>
   </head>
@@ -139,7 +147,7 @@
             <div class="currentUserHeader p-2 ">
               <img
               src="./images/vecteezy_a-happy-woman-wearing-a-color-t-shirt-smiling-brightly_46822758.png"
-              alt=""
+              alt="" class="userImage"
             />
             </div>
             
@@ -148,6 +156,7 @@
                   <img
                     src="./images/vecteezy_a-happy-woman-wearing-a-color-t-shirt-smiling-brightly_46822758.png"
                     alt=""
+                    class="userImage"
                   />
                   <span class="userName">Ritik</span>
                 </li>
@@ -155,6 +164,7 @@
                   <img
                     src="./images/vecteezy_ai-generated-portrait-of-handsome-smiling-young-man-with_41642170.png"
                     alt=""
+                    class="userImage"
                   />
                   <span class="userName">Kiran</span>
                 </li>
@@ -162,6 +172,7 @@
                   <img
                     src="./images/vecteezy_young-smiling-woman-looking-at-camera-with-crossed-arms_24344064.png"
                     alt=""
+                    class="userImage"
                   />
                   <span class="userName">Ritik</span>
                 </li>
@@ -169,6 +180,7 @@
                   <img
                     src="./images/vecteezy_a-happy-woman-wearing-a-color-t-shirt-smiling-brightly_46822758.png"
                     alt=""
+                    class="userImage"
                   />
                   <span class="userName">Ritik</span>
                 </li>
@@ -176,6 +188,7 @@
                   <img
                     src="./images/vecteezy_a-happy-woman-wearing-a-color-t-shirt-smiling-brightly_46822758.png"
                     alt=""
+                    class="userImage"
                   />
                   <span class="userName">Dipti</span>
                 </li>
@@ -183,6 +196,7 @@
                   <img
                     src="./images/vecteezy_ai-generated-portrait-of-handsome-smiling-young-man-with_41642170.png"
                     alt=""
+                    class="userImage"
                   />
                   <span class="userName">Kavita</span>
                 </li>
@@ -190,6 +204,7 @@
                   <img
                     src="./images/vecteezy_young-smiling-woman-looking-at-camera-with-crossed-arms_24344064.png"
                     alt=""
+                    class="userImage"
                   />
                   <span class="userName">Suman</span>
                 </li>
@@ -197,6 +212,7 @@
                   <img
                     src="./images/vecteezy_ai-generated-portrait-of-handsome-smiling-young-man-with_41642170.png"
                     alt=""
+                    class="userImage"
                   />
                   <span class="userName">Suman</span>
                 </li>
@@ -204,6 +220,7 @@
                   <img
                     src="./images/vecteezy_young-smiling-woman-looking-at-camera-with-crossed-arms_24344064.png"
                     alt=""
+                    class="userImage"
                   />
                   <span class="userName">Pratik</span>
                 </li>
@@ -211,6 +228,7 @@
                   <img
                     src="./images/vecteezy_young-smiling-woman-looking-at-camera-with-crossed-arms_24344064.png"
                     alt=""
+                    class="userImage"
                   />
                   <span class="userName">Ritik</span>
                 </li>
@@ -218,6 +236,7 @@
                   <img
                     src="./images/vecteezy_young-smiling-woman-looking-at-camera-with-crossed-arms_24344064.png"
                     alt=""
+                    class="userImage"
                   />
                   <span class="userName">Pratik</span>
                 </li>
@@ -230,24 +249,24 @@
                   <img
                   src="./images/vecteezy_ai-generated-portrait-of-handsome-smiling-young-man-with_41642170.png"
                   alt=""
+                  class="userImage"
                 />
-                  <span class="headerUsername">Ritik Sahoo</span>
+                  <span class="headerUsername">Ritik Sahoo </span>
                 </div>
                 <div>
-                  <p>search</p>
+                  <img src="./images/bubble-chat.png" alt="" class="chatImg">
                 </div>
               </header>
               <div class="messages">
                 <div class="message sender">
                   <p>Hi</p>
                 </div>
-                <div></div>
+               
                 <div class="senderDate"><p>8:45 pm</p></div>
                 
               
                 <div class="message receiver">
                   <p>Hello</p>
-                <div></div>
                 </div>
                 <div class="receiverDate"><p>8:45 pm</p></div>
 
@@ -302,7 +321,7 @@
                   class="form-control"
              
                 />
-                <img src="images/send-button.png" alt="">
+                <img src="images/send-button.png" alt="" class="sendButton">
               </div>
             </div>
           </div>
