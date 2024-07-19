@@ -11,6 +11,8 @@ const currentDate = document.getElementById("currentDate");
 const message = document.getElementById("message");
 const loginForm = document.getElementById("loginForm");
 const date = document.getElementById("currDate");
+let allUserName;
+const ulList = document.getElementById("ulList");
 
 let CURR_DATE = null;
 const loggedInUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -105,7 +107,6 @@ function loginFunc(e) {
         ? users[emailField].currentLoginCount + 1
         : 1,
     };
-
     // calculate the coins earned by user on login
     currentUser.coins = isLoggingInFirstTime
       ? 100
@@ -124,7 +125,6 @@ function loginFunc(e) {
 
     localStorage.setItem("currentUser", JSON.stringify(currentUser));
     localStorage.setItem("users", JSON.stringify(users));
-    // updateUserData(currentUser);
   } else {
     message.innerHTML = "Incorrect Email address or password";
     message.style.color = "red";
@@ -286,14 +286,12 @@ function checkForDateDifference(lastLoggedInDate) {
 // this function will update the user details after login
 (function updateUserData(user) {
   const currentUser = user || loggedInUser;
+
   const date = new Date(currentUser?.lastLoggedInDate);
-  console.log(date);
   const day = date.getDate();
   const month = date.getMonth() + 1;
   const year = date.getFullYear();
   const formattedDate = `${day}/${month}/${year}`;
-
-  // if (currentDate) currentDate.innerHTML = formattedDate;
 
   if (skinColor) {
     skinColor.innerHTML = currentUser?.skinColor;
