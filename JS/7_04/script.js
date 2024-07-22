@@ -12,7 +12,6 @@ const message = document.getElementById("message");
 const loginForm = document.getElementById("loginForm");
 const date = document.getElementById("currDate");
 let allUserName;
-const ulList = document.getElementById("ulList");
 
 let CURR_DATE = null;
 const loggedInUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -50,6 +49,11 @@ if (date) {
     if (isLoggedIn)
       window.location.href =
         window.location.origin + "/LS_intern/JS/7_04/newPage.html";
+  } else if (window.location.pathname === "/LS_intern/JS/7_04/chat.html") {
+    if (!isLoggedIn) {
+      window.location.href =
+        window.location.origin + "/LS_intern/JS/7_04/login.html";
+    }
   }
 })();
 
@@ -170,11 +174,10 @@ function registerFunc() {
       currentLoginCount: 0,
     };
 
-    // message.innerHTML = "User registered successfully";
     window.location.href =
       window.location.origin + "/LS_intern/JS/7_04/login.html";
     message.style.color = "green";
-    // set the user data in localStorage
+
     localStorage.setItem("users", JSON.stringify(users));
   }
 }
@@ -308,4 +311,57 @@ function calculateUserCoins(user) {
   const coinsReward = prizeCoins[(user.currentLoginCount % 6) - 1];
 
   return coinsReward;
+}
+
+//chat page
+const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+const users = JSON.parse(localStorage.getItem("users"));
+
+function showAllUser() {
+  const userList = document.getElementById("userList");
+
+  // current LoggedIn  UserName in header section
+  const loggedInUserName = document.getElementById("loggedInUserName");
+  loggedInUserName.textContent = currentUser.name;
+
+  let html = "";
+
+  // show all users excluding the current user
+  Object.keys(users).forEach((key) => {
+    if (key !== currentUser.email) {
+      const user = users[key];
+      // console.log(user);
+      html += `
+        <li class="list-group-item d-flex align-items-center data-email='${user.email}'"  onclick = "selectedUserFunc('${user.email}')">
+          <img src="./images/vecteezy_ai-generated-portrait-of-handsome-smiling-young-man-with_41642170.png" class="userImage">
+          <span class="userName" >${user.name}</span>
+        </li>
+      `;
+    }
+  });
+  userList.innerHTML = html;
+}
+showAllUser();
+
+function chatnow() {
+  window.location.href =
+    window.location.origin + "/LS_intern/JS/7_04/chat.html";
+}
+
+// selected user
+const messageHeader = document.getElementById("msgHeader");
+function selectedUserFunc(selectedUser) {
+  console.log(users[selectedUser]["name"]);
+  // document.getElementById("selectedUserName").innerText =
+  //   users[selectedUser]["name"];
+
+  let html = "";
+  html += ` <img
+                  src="./images/vecteezy_a-happy-woman-wearing-a-color-t-shirt-smiling-brightly_46822758.png"
+                  alt=""
+                  class="userImage chatImg"
+                />
+                <span class="headerUsername" id="selectedUserName">${users[selectedUser]["name"]}</span>`;
+
+  messageHeader.innerHTML = html;
 }
