@@ -13,6 +13,12 @@ const loginForm = document.getElementById("loginForm");
 const date = document.getElementById("currDate");
 let allUserName;
 let selectedUserEmail;
+let selectedUser;
+const msgInput = document.getElementById("msgInput");
+const messagesDiv = document.getElementById("messages");
+const userList = document.getElementById("userList");
+const msgHeader = document.getElementById("msgHeader");
+const users = JSON.parse(localStorage.getItem("users"));
 
 let CURR_DATE = null;
 const loggedInUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -316,114 +322,98 @@ function calculateUserCoins(user) {
 
 //chat page
 
-// if not present
-if (!localStorage.getItem("messages")) {
-  localStorage.setItem("messages", JSON.stringify({}));
-}
-
-const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-const users = JSON.parse(localStorage.getItem("users"));
-
-function showAllUser() {
-  const userList = document.getElementById("userList");
-
-  // current LoggedIn  UserName in header section
-  const loggedInUserName = document.getElementById("loggedInUserName");
-  loggedInUserName.textContent = currentUser.name;
-
-  let html = "";
-
-  Object.keys(users).forEach((key) => {
-    if (key !== currentUser.email) {
-      const user = users[key];
-      // console.log(user);
-      html += `
-        <li class="list-group-item d-flex align-items-center data-email='${user.email}'"  onclick = "selectedUserFunc('${user.email}')">
-          <img src="./images/vecteezy_ai-generated-portrait-of-handsome-smiling-young-man-with_41642170.png" class="userImage">
-          <span class="userName" >${user.name}</span>
-        </li>
-      `;
-    }
-  });
-  userList.innerHTML = html;
-}
-showAllUser();
-
 function chatnow() {
   window.location.href =
     window.location.origin + "/LS_intern/JS/7_04/chat.html";
 }
 
-// selected user
-const messageHeader = document.getElementById("msgHeader");
-function selectedUserFunc(selectedUser) {
-  selectedUserEmail = users[selectedUser]["name"];
-  let html = "";
-  html += ` <img
-                  src="./images/vecteezy_a-happy-woman-wearing-a-color-t-shirt-smiling-brightly_46822758.png"
-                  alt=""
-                  class="userImage chatImg"
-                />
-                <span class="headerUsername" id="selectedUserName">${users[selectedUser]["name"]}</span>`;
-  messageHeader.innerHTML = html;
-
-  const storedMessages = JSON.parse(localStorage.getItem("messages")) || {};
-  const selectedUserMessages = storedMessages[selectedUserEmail] || [];
-
-  displayMessages(selectedUserMessages);
+// Function to initialize chat with selected user
+function selectedUserFunc(selectedUserEmail) {
+  selectedUser = users[selectedUserEmail];
+  msgHeader.innerHTML = `
+    <img src="./images/vecteezy_a-happy-woman-wearing-a-color-t-shirt-smiling-brightly_46822758.png" alt="" class="userImage chatImg" />
+    <span class="headerUsername" id="selectedUserName">${selectedUser.name}</span>`;
+  showMessages(selectedUserEmail);
 }
 
+// Function to display messages between logged-in user and selected user
+function showMessages(selectedUserEmail) {
+  const messages = JSON.parse(localStorage.getItem("messages")) || {};
+  const conversationId = getConversationId(
+    loggedInUser.email,
+    selectedUserEmail
+  );
+
+  let html = "";
+  if (messages[conversationId]) {
+    messages[conversationId].forEach((message) => {
+      const messageType =
+        message.from === loggedInUser.email ? "sender" : "receiver";
+      html += `
+        <div class="message ${messageType}">
+          <p>${message.text}</p>
+          <div class="${messageType}Date">${message.date}</div>
+        </div>`;
+    });
+  }
+  messagesDiv.innerHTML = html;
+
+  // Scroll to bottom of messages
+  messagesDiv.scrollTop = messagesDiv.scrollHeight;
+}
+
+// Function to send message
 function sendMessage() {
-  selectedUserEmail;
-  console.log(selectedUserEmail);
-  if (selectedUserEmail === undefined) {
-    alert("Please select a user");
-    return;
-  }
-  const messageInput = document.getElementById("msgInput");
-  const content = messageInput.value.trim();
+  const selectedUserEmail = selectedUser.email;
+  const text = msgInput.value.trim();
+  if (text === "") return;
 
-  if (content === "") return;
+  const conversationId = getConversationId(
+    loggedInUser.email,
+    selectedUserEmail
+  );
+  const currentDate = new Date().toLocaleString();
 
-  const messageObj = {
-    sender: currentUser.name,
-    content: content,
-    timestamp: new Date().toISOString(),
+  // Prepare message object
+  const message = {
+    from: loggedInUser.email,
+    to: selectedUserEmail,
+    text: text,
+    date: currentDate,
   };
-  console.log(messageObj);
 
-  const storedMessage = JSON.parse(localStorage.getItem("messages")) || {};
-
-  if (!storedMessage[selectedUserEmail]) {
-    storedMessage[selectedUserEmail] = [];
+  // Save message to localStorage
+  let messages = JSON.parse(localStorage.getItem("messages")) || {};
+  if (!messages[conversationId]) {
+    messages[conversationId] = [];
   }
-  storedMessage[selectedUserEmail].push(messageObj);
-  console.log(storedMessage);
-  localStorage.setItem("messages", JSON.stringify(storedMessage));
+  messages[conversationId].push(message);
+  localStorage.setItem("messages", JSON.stringify(messages));
 
-  displayMessages(storedMessage[selectedUserEmail]);
+  // Clear input and display updated messages
+  msgInput.value = "";
+  showMessages(selectedUserEmail);
 }
 
-// display messages in the message box
-function displayMessages(messages) {
-  const messageBox = document.getElementById("messages");
+// Utility function to generate unique conversation id
+function getConversationId(email1, email2) {
+  return [email1, email2].sort().join("-");
+}
+
+//show all users excluding current loggedIn User
+function showAllUser() {
   let html = "";
-
-  messages.forEach((msg) => {
-    const messageClass =
-      msg.sender === currentUser.name ? "sender" : "receiver";
-    html += `
-        <div class="message ${messageClass}">
-          <p>${msg.content}</p>
-          <div class="${messageClass}Date">${formatMessageDate(
-      msg.timestamp
-    )}</div>
-        </div>
-      `;
+  Object.keys(users).forEach((key) => {
+    if (key !== loggedInUser.email) {
+      const user = users[key];
+      html += `
+        <li class="list-group-item d-flex align-items-center" data-email="${user.email}" onclick="selectedUserFunc('${user.email}')">
+          <img src="./images/vecteezy_ai-generated-portrait-of-handsome-smiling-young-man-with_41642170.png" class="userImage">
+          <span class="userName">${user.name}</span>
+        </li>`;
+    }
   });
-  messageBox.innerHTML = html;
+  userList.innerHTML = html;
 }
 
-function formatMessageDate(timestamp) {
-  return new Date(timestamp).toLocaleTimeString();
-}
+showAllUser();
