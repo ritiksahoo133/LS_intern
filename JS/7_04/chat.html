@@ -11,325 +11,272 @@
       crossorigin="anonymous"
     />
     <style>
-      .userName {
-        padding-left: 10px;
-        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
-          sans-serif;
-        color: rgb(248, 239, 239);
-        font-weight:bold
+      body {
+        background-color: #1a1a1a;
+        color: #ffffff;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       }
+
       .userImage {
-        border-radius: 50px;
-        border: 1px solid;
+        border-radius: 50%;
+        border: 2px solid #ffffff;
         height: 45px;
         width: 45px;
       }
 
       .scrollable-list {
+        max-height: 500px;
         overflow-y: auto;
-        max-height: 500px;
       }
-      .chat-container {
-        width: 75%;
-        margin: auto;
-        border: 1px solid #ccc;
-        padding: 10px;
-        overflow-y: scroll;
-        max-height: 500px;
-      }
+
       .message {
         margin-bottom: 10px;
-        padding: 5px 10px;
-        border-radius: 7px;
+        padding: 10px;
+        border-radius: 10px;
         clear: both;
-        max-width: 300px;
       }
+
       .sender {
         background-color: #dcf8c6;
         float: left;
         margin-left: 20px;
+        max-width: 70%;
       }
+
       .receiver {
         background-color: #e0e0e0;
         float: right;
         margin-right: 20px;
+        max-width: 70%;
       }
-      /* .input-container {
-        margin-top: 10px;
-      } */
-      .input-container input[type="text"] {
-        width: 100%;
 
-        border: 1px solid #ccc;
-        border-radius: 15px;
-        /* margin-right: 10px; */
-      }
-      /* .input-container button {
-        padding: 10px 20px;
-        background-color: 
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-      } */
       .messageBox {
-        background-color: rgb(72, 72, 71);
-        overflow: hidden;
-      }
-      .messages {
-        max-height: 450px;
+        background-color: #484848;
+        border-radius: 10px;
+        height: 550px;
         overflow-y: auto;
-        margin-top:10px;
       }
-      .input-container input {
+
+      .messages {
+        max-height: 500px;
+        overflow-y: auto;
+        margin-top: 10px;
+      }
+
+      .input-container {
+        display: flex;
+        margin-top: 10px;
+        background-color: #333333;
+        border-radius: 15px;
+        padding: 5px;
+      }
+
+      .input-container input[type="text"] {
         flex: 1;
-        margin-right: 10px;
+        padding: 10px;
+        border: none;
+        background-color: transparent;
+        color: #ffffff;
+      }
+
+      .sendButton {
+        width: 40px;
+        height: 36px;
+        padding-right: 8px;
+        cursor: pointer;
+      }
+
+      /* Sidebar styles */
+      .sidebar {
+        background-color: #333333;
+        color: #ffffff;
+        border-radius: 10px;
+      }
+
+      .sidebar .card-header {
+        background-color: #4b614b;
+        border-radius: 10px 10px 0 0;
+      }
+
+      .sidebar .list-group-item {
+        background-color: #484848;
+        border: none;
+        border-radius: 10px;
         margin-bottom: 5px;
-        margin-left: 30px;
+      }
+
+      .sidebar .list-group-item:hover {
+        background-color: #666666;
+      }
+
+      .sidebar .list-group-item img {
+        margin-right: 10px;
+      }
+
+      .sidebar .userName {
+        font-weight: bold;
+        font-size: 16px;
+      }
+
+      .messageBox .card-header {
+        background-color: #4b614b;
+        color: #ffffff;
+        border-radius: 10px 10px 0 0;
+      }
+
+      .messageBox .card-header .headerUsername {
+        margin-left: 10px;
+      }
+
+      .messageBox .chatImg {
+        width: 30px;
+        height: 30px;
       }
       .list-group-item {
-        background-color: rgb(51, 48, 48);
+        color: white;
       }
-      .headerUsername{
-        color: rgb(248, 239, 239);
-        padding-left: 10px;
+      #loggedInUserName {
+        font-weight: bold;
+        font-size: 16px;
       }
-      .headerRoot{
-        background-color: #4b614b;
-      }
-      .senderDate{
-        color:rgb(192, 192, 192);
-        clear:both;
-        padding-left: 40px;
-        
-      }
-      .receiverDate{
-        color:rgb(192, 192, 192);
-        clear:both;
-        float:right;
-        padding-right: 40px;
-      }
-      .currentUserHeader{  
-        padding-left: 10px;
-        background-color: #4b614b;
-        border:1px solid;
-      
-      }
-      .chatImg{
-        width:45px
-      }
-      .sendButton{
-        width:40px;
-        height:36px;
-        padding-right: 8px;
+      #selectedUserName {
+        font-weight: bold;
+        font-size: 14px;
       }
     </style>
   </head>
 
   <body>
-  
-
-   <div class="container mt-5">
-      <div
-        class="col-sm-12  col-md-8 d-flex justify-content-center align-items-center bg-dark  rounded-2 w-auto"
-      >
-        <div
-          class="card"
-          style="width: 100%; height: 100%"
-        >
-          <div class="d-flex">
-            <!-- Sidebar with user list -->
-             
-            <div
-              class="me-auto p-0 bd-highlight"
-              style="width: 30%;"
-            >
-            
-            <div class="currentUserHeader p-2 ">
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card sidebar">
+            <div class="card-header">
               <img
-              src="./images/vecteezy_a-happy-woman-wearing-a-color-t-shirt-smiling-brightly_46822758.png"
-              alt="" class="userImage"
-            />
+                src="./images/vecteezy_young-smiling-woman-looking-at-camera-with-crossed-arms_24344064.png"
+                alt=""
+                class="userImage chatImg"
+                id="currentHeaderImg"
+              />
+              <span class="headerUsername" id="loggedInUserName"></span>
             </div>
-            
-              <ul class="list-group list-group-flush scrollable-list scrollable-list" id="ulList">
-                <li class="list-group-item">
-                  <img
-                    src="./images/vecteezy_a-happy-woman-wearing-a-color-t-shirt-smiling-brightly_46822758.png"
-                    alt=""
-                    class="userImage"
-                  />
-                  <span class="userName" id="userName">Ritik</span>
-                </li> 
-                <li class="list-group-item">
-                  <img
-                    src="./images/vecteezy_ai-generated-portrait-of-handsome-smiling-young-man-with_41642170.png"
-                    alt=""
-                    class="userImage"
-                  />
-                  <span class="userName" id="userName">Kiran</span>
-                </li>
-                <li class="list-group-item">
-                  <img
-                    src="./images/vecteezy_young-smiling-woman-looking-at-camera-with-crossed-arms_24344064.png"
-                    alt=""
-                    class="userImage"
-                  />
-                  <span class="userName" id="userName">Ritik</span>
-                </li>
-                <li class="list-group-item">
-                  <img
-                    src="./images/vecteezy_a-happy-woman-wearing-a-color-t-shirt-smiling-brightly_46822758.png"
-                    alt=""
-                    class="userImage"
-                  />
-                  <span class="userName" id="userName">Ritik</span>
-                </li>
-                <li class="list-group-item">
-                  <img
-                    src="./images/vecteezy_a-happy-woman-wearing-a-color-t-shirt-smiling-brightly_46822758.png"
-                    alt=""
-                    class="userImage"
-                  />
-                  <span class="userName" id="userName">Dipti</span>
-                </li>
-                <li class="list-group-item">
-                  <img
-                    src="./images/vecteezy_ai-generated-portrait-of-handsome-smiling-young-man-with_41642170.png"
-                    alt=""
-                    class="userImage"
-                  />
-                  <span class="userName" id="userName">Kavita</span>
-                </li>
-                <li class="list-group-item">
-                  <img
-                    src="./images/vecteezy_young-smiling-woman-looking-at-camera-with-crossed-arms_24344064.png"
-                    alt=""
-                    class="userImage"
-                  />
-                  <span class="userName" id="userName">Suman</span>
-                </li>
-                <li class="list-group-item">
-                  <img
-                    src="./images/vecteezy_ai-generated-portrait-of-handsome-smiling-young-man-with_41642170.png"
-                    alt=""
-                    class="userImage"
-                  />
-                  <span class="userName" id="userName">Suman</span>
-                </li>
-                <li class="list-group-item">
-                  <img
-                    src="./images/vecteezy_young-smiling-woman-looking-at-camera-with-crossed-arms_24344064.png"
-                    alt=""
-                    class="userImage"
-                  />
-                  <span class="userName" id="userName">Pratik</span>
-                </li>
-                <li class="list-group-item">
-                  <img
-                    src="./images/vecteezy_young-smiling-woman-looking-at-camera-with-crossed-arms_24344064.png"
-                    alt=""
-                    class="userImage"
-                  />
-                  <span class="userName" id="userName">Ritik</span>
-                </li>
-                <li class="list-group-item">
-                  <img
-                    src="./images/vecteezy_young-smiling-woman-looking-at-camera-with-crossed-arms_24344064.png"
-                    alt=""
-                    class="userImage"
-                  />
-                  <span class="userName" id="userName">Pratik</span>
-                </li>
-              </ul>
+            <div class="card-body p-0">
+              <ul
+                class="list-group list-group-flush scrollable-list"
+                id="userList"
+              ></ul>
             </div>
+          </div>
+        </div>
 
-            <div class="bd highlight messageBox" style="width: 70%">
-              <header class="d-flex justify-content-between align-items-center p-2 border-2 headerRoot">
-                <div class="messageHeader">
-                  <img
-                  src="./images/vecteezy_ai-generated-portrait-of-handsome-smiling-young-man-with_41642170.png"
+        <div class="col-md-8">
+          <div class="card messageBox">
+            <div
+              class="card-header d-flex align-items-center justify-content-between p-2"
+            >
+              <div class="messageHeader" id="msgHeader">
+                <!-- <img
+                  src="./images/vecteezy_a-happy-woman-wearing-a-color-t-shirt-smiling-brightly_46822758.png"
                   alt=""
-                  class="userImage"
+                  class="userImage chatImg"
                 />
-                  <span class="headerUsername">Ritik Sahoo </span>
-                </div>
-                <div>
-                  <img src="./images/bubble-chat.png" alt="" class="chatImg">
-                </div>
-              </header>
-              <div class="messages">
-                <div class="message sender">
-                  <p>Hi</p>
-                </div>
-               
-                <div class="senderDate"><p>8:45 pm</p></div>
-                
-              
-                <div class="message receiver">
-                  <p>Hello</p>
-                </div>
-                <div class="receiverDate"><p>8:45 pm</p></div>
-
-                <div class="message sender">
-                  <p>How are you</p>
-                </div>
-                <div class="senderDate"><p>8:45 pm</p></div>
-
-                <div class="message receiver">
-                  <p>I am fine Lorem ipsum dolor sit amet consectetubdfkjbv fkjv,b dfnmv,dfs vnvnfv ndfvnekfjvbrek,jgbevng dfmvdfn</p>
-                </div>
-                <div class="receiverDate"><p>8:45 pm</p></div>
-
-                <div class="message sender">
-                  <p>Ok</p>
-                </div>
-                <div class="senderDate"><p>8:45 pm</p></div>
-
-                <div class="message receiver">
-                  <p>Receiver</p>
-                </div>
-                <div class="receiverDate"><p>8:45 pm</p></div>
-
-                <div class="message sender">
-                  <p>Sender's message</p>
-                </div>
-                <div class="senderDate"><p>8:45 pm</p></div>
-
-                <div class="message receiver">
-                  <p>Receiver</p>
-                </div>
-                <div class="receiverDate"><p>8:45 pm</p></div>
-
-                <div class="message sender">
-                  <p>Sender's message</p>
-                </div>
-                <div class="senderDate"><p>8:45 pm</p></div>
-
-                <div class="message receiver">
-                  <p>Receiver</p>
-                </div>
-                <div class="receiverDate"><p>8:45 pm</p></div>
+                <span class="headerUsername" id="selectedUserName"></span> -->
               </div>
-
-              <div
-                class="input-container"
-                style="display: flex; margin-top: 5px"
-              >
-                <input
-                  type="text"
-                  placeholder="Type your message..."
-                  class="form-control"
-             
-                />
-                <img src="images/send-button.png" alt="" class="sendButton">
+              <img src="./images/bubble-chat.png" alt="" class="chatImg" />
+            </div>
+            <div class="card-body messages" id="messages">
+              <!-- <div class="message sender">
+                <p>Hi</p>
+                <div class="senderDate">8:45 pm</div>
               </div>
+              <div class="message receiver">
+                <p>Hello</p>
+                <div class="receiverDate">8:45 pm</div>
+              </div>
+              <div class="message sender">
+                <p>Hi</p>
+                <div class="senderDate">8:45 pm</div>
+              </div>
+              <div class="message receiver">
+                <p>Hello</p>
+                <div class="receiverDate">8:45 pm</div>
+              </div>
+              <div class="message sender">
+                <p>Hi</p>
+                <div class="senderDate">8:45 pm</div>
+              </div>
+              <div class="message receiver">
+                <p>Hello</p>
+                <div class="receiverDate">8:45 pm</div>
+              </div>
+              <div class="message sender">
+                <p>Hi</p>
+                <div class="senderDate">8:45 pm</div>
+              </div>
+              <div class="message receiver">
+                <p>Hello</p>
+                <div class="receiverDate">8:45 pm</div>
+              </div>
+              <div class="message sender">
+                <p>Hi</p>
+                <div class="senderDate">8:45 pm</div>
+              </div>
+              <div class="message receiver">
+                <p>Hello</p>
+                <div class="receiverDate">8:45 pm</div>
+              </div>
+              <div class="message sender">
+                <p>Hi</p>
+                <div class="senderDate">8:45 pm</div>
+              </div>
+              <div class="message receiver">
+                <p>Hello</p>
+                <div class="receiverDate">8:45 pm</div>
+              </div>
+              <div class="message sender">
+                <p>Hi</p>
+                <div class="senderDate">8:45 pm</div>
+              </div>
+              <div class="message receiver">
+                <p>Hello</p>
+                <div class="receiverDate">8:45 pm</div>
+              </div>
+              <div class="message sender">
+                <p>Hi</p>
+                <div class="senderDate">8:45 pm</div>
+              </div>
+              <div class="message receiver">
+                <p>Hello</p>
+                <div class="receiverDate">8:45 pm</div>
+              </div>
+              <div class="message sender">
+                <p>Hi</p>
+                <div class="senderDate">8:45 pm</div>
+              </div>
+              <div class="message receiver">
+                <p>Hello</p>
+                <div class="receiverDate">8:45 pm</div>
+              </div> -->
+            </div>
+            <div class="card-footer input-container">
+              <input
+                type="text"
+                placeholder="Type your message..."
+                class="form-control"
+                id="msgInput"
+              />
+              <img
+                src="images/send-button.png"
+                alt=""
+                class="sendButton"
+                onclick="sendMessage()"
+                id="sendMessageBtn"
+              />
             </div>
           </div>
         </div>
       </div>
     </div>
-    </body>
 
     <script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./script.js"></script>
