@@ -12,6 +12,7 @@ const message = document.getElementById("message");
 const loginForm = document.getElementById("loginForm");
 const date = document.getElementById("currDate");
 let allUserName;
+let selectedUserEmail;
 
 let CURR_DATE = null;
 const loggedInUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -314,6 +315,12 @@ function calculateUserCoins(user) {
 }
 
 //chat page
+
+// if not present
+if (!localStorage.getItem("messages")) {
+  localStorage.setItem("messages", JSON.stringify({}));
+}
+
 const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 const users = JSON.parse(localStorage.getItem("users"));
 
@@ -326,7 +333,6 @@ function showAllUser() {
 
   let html = "";
 
-  // show all users excluding the current user
   Object.keys(users).forEach((key) => {
     if (key !== currentUser.email) {
       const user = users[key];
@@ -351,10 +357,7 @@ function chatnow() {
 // selected user
 const messageHeader = document.getElementById("msgHeader");
 function selectedUserFunc(selectedUser) {
-  console.log(users[selectedUser]["name"]);
-  // document.getElementById("selectedUserName").innerText =
-  //   users[selectedUser]["name"];
-
+  selectedUserEmail = users[selectedUser]["name"];
   let html = "";
   html += ` <img
                   src="./images/vecteezy_a-happy-woman-wearing-a-color-t-shirt-smiling-brightly_46822758.png"
@@ -362,6 +365,65 @@ function selectedUserFunc(selectedUser) {
                   class="userImage chatImg"
                 />
                 <span class="headerUsername" id="selectedUserName">${users[selectedUser]["name"]}</span>`;
-
   messageHeader.innerHTML = html;
+
+  const storedMessages = JSON.parse(localStorage.getItem("messages")) || {};
+  const selectedUserMessages = storedMessages[selectedUserEmail] || [];
+
+  displayMessages(selectedUserMessages);
+}
+
+function sendMessage() {
+  selectedUserEmail;
+  console.log(selectedUserEmail);
+  if (selectedUserEmail === undefined) {
+    alert("Please select a user");
+    return;
+  }
+  const messageInput = document.getElementById("msgInput");
+  const content = messageInput.value.trim();
+
+  if (content === "") return;
+
+  const messageObj = {
+    sender: currentUser.name,
+    content: content,
+    timestamp: new Date().toISOString(),
+  };
+  console.log(messageObj);
+
+  const storedMessage = JSON.parse(localStorage.getItem("messages")) || {};
+
+  if (!storedMessage[selectedUserEmail]) {
+    storedMessage[selectedUserEmail] = [];
+  }
+  storedMessage[selectedUserEmail].push(messageObj);
+  console.log(storedMessage);
+  localStorage.setItem("messages", JSON.stringify(storedMessage));
+
+  displayMessages(storedMessage[selectedUserEmail]);
+}
+
+// display messages in the message box
+function displayMessages(messages) {
+  const messageBox = document.getElementById("messages");
+  let html = "";
+
+  messages.forEach((msg) => {
+    const messageClass =
+      msg.sender === currentUser.name ? "sender" : "receiver";
+    html += `
+        <div class="message ${messageClass}">
+          <p>${msg.content}</p>
+          <div class="${messageClass}Date">${formatMessageDate(
+      msg.timestamp
+    )}</div>
+        </div>
+      `;
+  });
+  messageBox.innerHTML = html;
+}
+
+function formatMessageDate(timestamp) {
+  return new Date(timestamp).toLocaleTimeString();
 }
