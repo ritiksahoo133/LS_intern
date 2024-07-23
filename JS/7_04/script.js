@@ -13,12 +13,15 @@ const loginForm = document.getElementById("loginForm");
 const date = document.getElementById("currDate");
 let allUserName;
 let selectedUserEmail;
+let currentSelectedUserEmail = null;
 let selectedUser;
 const msgInput = document.getElementById("msgInput");
 const messagesDiv = document.getElementById("messages");
 const userList = document.getElementById("userList");
 const msgHeader = document.getElementById("msgHeader");
 const users = JSON.parse(localStorage.getItem("users"));
+let loggedInUserBackgroundColor;
+let storedColor;
 
 let CURR_DATE = null;
 const loggedInUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -349,11 +352,17 @@ function showMessages(selectedUserEmail) {
 
   let html = "";
   if (messages[conversationId]) {
-    messages[conversationId].forEach((message) => {
+    // Sort messages
+    const sortedMessages = messages[conversationId].sort((a, b) => {
+      const dateA = new Date(a.date);
+      const dateB = new Date(b.date);
+      return dateA - dateB;
+    });
+
+    sortedMessages.forEach((message) => {
       const messageType =
         message.from === loggedInUser.email ? "sender" : "receiver";
       html += `
-      
         <div class="message ${messageType}">
           <p>${message.text}</p>
           <div class="${messageType}Date">${message.date}</div>
@@ -427,6 +436,7 @@ function showAllUser() {
   Object.keys(users).forEach((key) => {
     if (key !== loggedInUser.email) {
       const user = users[key];
+
       html += `
         <li class="list-group-item d-flex align-items-center" data-email="${user.email}" onclick="selectedUserFunc('${user.email}')">
           <img src="./images/vecteezy_ai-generated-portrait-of-handsome-smiling-young-man-with_41642170.png" class="userImage">
@@ -435,12 +445,20 @@ function showAllUser() {
     }
   });
   userList.innerHTML = html;
+  initializeBackgroundColor(loggedInUser.email);
 }
 
 showAllUser();
 
-function changeBackground(bgImage) {
-  document.querySelector(
-    ".messageBox"
-  ).style.backgroundImage = `url(${bgImage})`;
+function changeBackgroundColor(color) {
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  document.querySelector(".messageBox").style.backgroundColor = color;
+  localStorage.setItem(currentUser.email + "_backgroundColor", color);
 }
+function initializeBackgroundColor(userEmail) {
+  const storedColor = localStorage.getItem(userEmail + "_backgroundColor");
+  if (storedColor) {
+    document.querySelector(".messageBox").style.backgroundColor = storedColor;
+  }
+}
+initializeBackgroundColor(loggedInUser.email);

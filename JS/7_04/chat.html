@@ -10,6 +10,7 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+
     <style>
       body {
         background-color: #1a1a1a;
@@ -31,23 +32,37 @@
 
       .message {
         margin-bottom: 10px;
-        padding: 10px;
+        padding: 3px;
         border-radius: 10px;
         clear: both;
+        width: fit-content;
       }
 
       .sender {
         background-color: #dcf8c6;
         float: left;
-        margin-left: 20px;
         max-width: 70%;
       }
 
       .receiver {
         background-color: #e0e0e0;
         float: right;
-        margin-right: 20px;
         max-width: 70%;
+      }
+
+      .sender p,
+      .receiver p {
+        margin: 0;
+        color: #000000;
+        font-size: 14px;
+      }
+
+      .senderDate,
+      .receiverDate {
+        font-size: 12px;
+        color: #666666;
+        margin-top: 5px;
+        text-align: right;
       }
 
       .messageBox {
@@ -86,7 +101,6 @@
         cursor: pointer;
       }
 
-      /* Sidebar styles */
       .sidebar {
         background-color: #333333;
         color: #ffffff;
@@ -114,7 +128,7 @@
       }
 
       .sidebar .userName {
-        font-weight: bold;
+        font-weight: initial;
         font-size: 16px;
       }
 
@@ -132,16 +146,26 @@
         width: 30px;
         height: 30px;
       }
-      .list-group-item {
-        color: white;
-      }
+
       #loggedInUserName {
         font-weight: bold;
         font-size: 16px;
       }
+
       #selectedUserName {
-        font-weight: bold;
+        font-weight: inherit;
         font-size: 14px;
+      }
+
+      .senderDate {
+        font-size: 12px;
+      }
+
+      .receiverDate {
+        font-size: 12px;
+      }
+      .userName {
+        color: #ffffff;
       }
     </style>
   </head>
@@ -183,36 +207,30 @@
                 <span class="headerUsername" id="selectedUserName"></span> -->
               </div>
 
-              <!-- <img src="./images/bubble-chat.png" alt="" class="chatImg" /> -->
               <div class="dropdown">
-                <button
+                <a
                   class="btn btn-secondary dropdown-toggle"
-                  type="button"
-                  id="backgroundDropdown"
+                  href="#"
+                  role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
                   ...
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="backgroundDropdown">
+                </a>
+
+                <ul class="dropdown-menu">
                   <li>
-                    <a
-                      class="dropdown-item"
-                      href="#"
-                      onclick="changeBackground('./images/background1.jpg')"
-                      >Background 1
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      class="dropdown-item"
-                      href="#"
-                      onclick="changeBackground('./images/background2.jpg')"
-                      >Background 2</a
-                    >
+                    background-color:
+                    <input
+                      type="color"
+                      id="backgroundColorPicker"
+                      onchange="changeBackgroundColor(this.value)"
+                      value="#484848"
+                    />
                   </li>
                 </ul>
               </div>
+              <!-- <img src="./images/bubble-chat.png" alt="" class="chatImg" /> -->
             </div>
             <div class="card-body messages" id="messages">
               <!-- <div class="message sender">
