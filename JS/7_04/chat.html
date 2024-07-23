@@ -182,7 +182,37 @@
                 />
                 <span class="headerUsername" id="selectedUserName"></span> -->
               </div>
-              <img src="./images/bubble-chat.png" alt="" class="chatImg" />
+
+              <!-- <img src="./images/bubble-chat.png" alt="" class="chatImg" /> -->
+              <div class="dropdown">
+                <button
+                  class="btn btn-secondary dropdown-toggle"
+                  type="button"
+                  id="backgroundDropdown"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  ...
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="backgroundDropdown">
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="#"
+                      onclick="changeBackground('./images/background1.jpg')"
+                      >Background 1
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="#"
+                      onclick="changeBackground('./images/background2.jpg')"
+                      >Background 2</a
+                    >
+                  </li>
+                </ul>
+              </div>
             </div>
             <div class="card-body messages" id="messages">
               <!-- <div class="message sender">

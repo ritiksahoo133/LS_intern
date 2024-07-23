@@ -320,14 +320,16 @@ function calculateUserCoins(user) {
   return coinsReward;
 }
 
-//chat page
+// current loggedIn user
+document.getElementById("loggedInUserName").textContent = loggedInUser.name;
 
+// chat page
 function chatnow() {
   window.location.href =
     window.location.origin + "/LS_intern/JS/7_04/chat.html";
 }
 
-// Function to initialize chat with selected user
+// selected user
 function selectedUserFunc(selectedUserEmail) {
   selectedUser = users[selectedUserEmail];
   msgHeader.innerHTML = `
@@ -336,9 +338,10 @@ function selectedUserFunc(selectedUserEmail) {
   showMessages(selectedUserEmail);
 }
 
-// Function to display messages between logged-in user and selected user
+// display message between loggedInUser and selectedUser
 function showMessages(selectedUserEmail) {
   const messages = JSON.parse(localStorage.getItem("messages")) || {};
+
   const conversationId = getConversationId(
     loggedInUser.email,
     selectedUserEmail
@@ -350,6 +353,7 @@ function showMessages(selectedUserEmail) {
       const messageType =
         message.from === loggedInUser.email ? "sender" : "receiver";
       html += `
+      
         <div class="message ${messageType}">
           <p>${message.text}</p>
           <div class="${messageType}Date">${message.date}</div>
@@ -358,7 +362,6 @@ function showMessages(selectedUserEmail) {
   }
   messagesDiv.innerHTML = html;
 
-  // Scroll to bottom of messages
   messagesDiv.scrollTop = messagesDiv.scrollHeight;
 }
 
@@ -372,32 +375,50 @@ function sendMessage() {
     loggedInUser.email,
     selectedUserEmail
   );
-  const currentDate = new Date().toLocaleString();
+  const currentTime = currentDateTimeFunc(new Date());
 
-  // Prepare message object
+  // message object
   const message = {
     from: loggedInUser.email,
     to: selectedUserEmail,
     text: text,
-    date: currentDate,
+    date: currentTime,
   };
 
-  // Save message to localStorage
+  // then save message to localstorage
   let messages = JSON.parse(localStorage.getItem("messages")) || {};
+
+  // if  conversationid not present
   if (!messages[conversationId]) {
     messages[conversationId] = [];
   }
   messages[conversationId].push(message);
   localStorage.setItem("messages", JSON.stringify(messages));
 
-  // Clear input and display updated messages
+  // Clear input
   msgInput.value = "";
   showMessages(selectedUserEmail);
 }
 
-// Utility function to generate unique conversation id
+// unique conversation id
 function getConversationId(email1, email2) {
   return [email1, email2].sort().join("-");
+}
+
+// format date in 'date hr:min am/pm' format
+function currentDateTimeFunc(date) {
+  const day = date.getDate();
+  const month = date.toLocaleString("default", { month: "short" });
+  const year = date.getFullYear();
+
+  let hours = date.getHours();
+  const minutes = ("0" + date.getMinutes()).slice(-2);
+  const ampm = hours >= 12 ? "pm" : "am";
+  hours = hours % 12;
+  hours = hours ? hours : 12;
+
+  const formattedDate = `${day} ${month} ${year} ${hours}:${minutes} ${ampm}`;
+  return formattedDate;
 }
 
 //show all users excluding current loggedIn User
@@ -417,3 +438,9 @@ function showAllUser() {
 }
 
 showAllUser();
+
+function changeBackground(bgImage) {
+  document.querySelector(
+    ".messageBox"
+  ).style.backgroundImage = `url(${bgImage})`;
+}
