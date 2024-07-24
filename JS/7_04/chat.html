@@ -21,8 +21,8 @@
       .userImage {
         border-radius: 50%;
         border: 2px solid #ffffff;
-        height: 45px;
-        width: 45px;
+        height: 36px;
+        width: 36px;
       }
 
       .scrollable-list {
@@ -42,12 +42,14 @@
         background-color: #dcf8c6;
         float: left;
         max-width: 70%;
+        padding-inline: 10px;
       }
 
       .receiver {
         background-color: #e0e0e0;
         float: right;
         max-width: 70%;
+        padding-inline: 10px;
       }
 
       .sender p,
@@ -129,7 +131,34 @@
 
       .sidebar .userName {
         font-weight: initial;
-        font-size: 16px;
+        font-size: 14px;
+        margin: 0;
+        font-family: cursive;
+      }
+
+      .list-group-item > div {
+        flex: 1;
+      }
+
+      .lastMessageWrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .lastMessage {
+        width: 15ch;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: rgb(182, 179, 179);
+        font-size: 13px;
+      }
+
+      .lastMessageTime {
+        font-size: 12px;
+
+        color: rgb(182, 179, 179);
       }
 
       .messageBox .card-header {
@@ -148,13 +177,14 @@
       }
 
       #loggedInUserName {
-        font-weight: bold;
+        /* font-weight: bold; */
         font-size: 16px;
+        font-family: cursive;
       }
 
       #selectedUserName {
-        font-weight: inherit;
         font-size: 14px;
+        font-family: cursive;
       }
 
       .senderDate {
@@ -166,6 +196,9 @@
       }
       .userName {
         color: #ffffff;
+      }
+      .colorPicker {
+        background-color: #8a8686;
       }
     </style>
   </head>
@@ -218,9 +251,9 @@
                   ...
                 </a>
 
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu colorPicker">
                   <li>
-                    background-color:
+                    Background Image
                     <input
                       type="color"
                       id="backgroundColorPicker"

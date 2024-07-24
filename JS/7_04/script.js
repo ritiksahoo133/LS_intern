@@ -354,9 +354,7 @@ function showMessages(selectedUserEmail) {
   if (messages[conversationId]) {
     // Sort messages
     const sortedMessages = messages[conversationId].sort((a, b) => {
-      const dateA = new Date(a.date);
-      const dateB = new Date(b.date);
-      return dateA - dateB;
+      return new Date(a.date) - new Date(b.date);
     });
 
     sortedMessages.forEach((message) => {
@@ -407,6 +405,8 @@ function sendMessage() {
   // Clear input
   msgInput.value = "";
   showMessages(selectedUserEmail);
+  4;
+  showAllUser();
 }
 
 // unique conversation id
@@ -437,10 +437,26 @@ function showAllUser() {
     if (key !== loggedInUser.email) {
       const user = users[key];
 
+      const conversationId = getConversationId(loggedInUser.email, user.email);
+      const messages = JSON.parse(localStorage.getItem("messages")) || {};
+      const conversationMessages = messages[conversationId] || [];
+      const lastMessage = conversationMessages[conversationMessages.length - 1];
+      console.log(lastMessage);
+
       html += `
-        <li class="list-group-item d-flex align-items-center" data-email="${user.email}" onclick="selectedUserFunc('${user.email}')">
+        <li class="list-group-item d-flex align-items-center" data-email="${
+          user.email
+        }" onclick="selectedUserFunc('${user.email}')">
           <img src="./images/vecteezy_ai-generated-portrait-of-handsome-smiling-young-man-with_41642170.png" class="userImage">
-          <span class="userName">${user.name}</span>
+          <div>
+            <p class="userName">${user.name}</p>
+            <div class="lastMessageWrapper">
+              <p class="lastMessage">${lastMessage ? lastMessage.text : ""}</p>
+              <span class="lastMessageTime">${
+                lastMessage ? getTime(lastMessage.date) : ""
+              }</span>
+            </div>
+          </div>
         </li>`;
     }
   });
@@ -462,3 +478,21 @@ function initializeBackgroundColor(userEmail) {
   }
 }
 initializeBackgroundColor(loggedInUser.email);
+
+function getTime(time) {
+  var date = new Date(time);
+
+  var hours = date.getHours() % 12;
+  if (hours === 0) {
+    hours = 12;
+  }
+  var minutes = date.getMinutes();
+  var period = date.getHours() < 12 ? "am" : "pm";
+
+  // Format the time string
+  var timeString =
+    hours + ":" + (minutes < 10 ? "0" + minutes : minutes) + " " + period;
+
+  console.log(timeString);
+  return timeString;
+}
