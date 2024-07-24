@@ -400,12 +400,12 @@ function sendMessage() {
     messages[conversationId] = [];
   }
   messages[conversationId].push(message);
+
   localStorage.setItem("messages", JSON.stringify(messages));
 
   // Clear input
   msgInput.value = "";
   showMessages(selectedUserEmail);
-  4;
   showAllUser();
 }
 
@@ -433,6 +433,7 @@ function currentDateTimeFunc(date) {
 //show all users excluding current loggedIn User
 function showAllUser() {
   let html = "";
+
   Object.keys(users).forEach((key) => {
     if (key !== loggedInUser.email) {
       const user = users[key];
@@ -441,7 +442,7 @@ function showAllUser() {
       const messages = JSON.parse(localStorage.getItem("messages")) || {};
       const conversationMessages = messages[conversationId] || [];
       const lastMessage = conversationMessages[conversationMessages.length - 1];
-      console.log(lastMessage);
+      // console.log(lastMessage);
 
       html += `
         <li class="list-group-item d-flex align-items-center" data-email="${
@@ -481,7 +482,6 @@ initializeBackgroundColor(loggedInUser.email);
 
 function getTime(time) {
   var date = new Date(time);
-
   var hours = date.getHours() % 12;
   if (hours === 0) {
     hours = 12;
@@ -492,7 +492,6 @@ function getTime(time) {
   // Format the time string
   var timeString =
     hours + ":" + (minutes < 10 ? "0" + minutes : minutes) + " " + period;
-
-  console.log(timeString);
+  // console.log(timeString);
   return timeString;
 }
