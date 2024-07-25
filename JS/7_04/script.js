@@ -333,18 +333,41 @@ function chatnow() {
 }
 
 // selected user
+
 function selectedUserFunc(selectedUserEmail) {
   selectedUser = users[selectedUserEmail];
   msgHeader.innerHTML = `
     <img src="./images/vecteezy_a-happy-woman-wearing-a-color-t-shirt-smiling-brightly_46822758.png" alt="" class="userImage chatImg" />
     <span class="headerUsername" id="selectedUserName">${selectedUser.name}</span>`;
   showMessages(selectedUserEmail);
+
+  // Mark all messages as seen when selecting the user
+  markMessagesAsSeen(selectedUserEmail);
 }
 
-// display message between loggedInUser and selectedUser
+// mark messages as seen as per the loggedIn user
+function markMessagesAsSeen(selectedUserEmail) {
+  const messages = JSON.parse(localStorage.getItem("messages")) || {};
+  const conversationId = getConversationId(
+    loggedInUser.email,
+    selectedUserEmail
+  );
+
+  if (messages[conversationId]) {
+    messages[conversationId].forEach((message) => {
+      if (message.to === loggedInUser.email && message.status === "unseen") {
+        message.status = "seen";
+      }
+    });
+
+    localStorage.setItem("messages", JSON.stringify(messages));
+    showMessages(selectedUserEmail);
+  }
+}
+
+// messages between loggedInUser and selectedUser
 function showMessages(selectedUserEmail) {
   const messages = JSON.parse(localStorage.getItem("messages")) || {};
-
   const conversationId = getConversationId(
     loggedInUser.email,
     selectedUserEmail
@@ -352,26 +375,38 @@ function showMessages(selectedUserEmail) {
 
   let html = "";
   if (messages[conversationId]) {
-    const sortedMessages = messages[conversationId].sort((a, b) => {
-      return new Date(a.date) - new Date(b.date);
-    });
+    const sortedMessages = messages[conversationId].sort(
+      (a, b) => new Date(a.date) - new Date(b.date)
+    );
     sortedMessages.forEach((message) => {
       const messageType =
         message.from === loggedInUser.email ? "sender" : "receiver";
-      html += `
-        <div class="message ${messageType}">
-          <p>${message.text}</p>
-          <div class="${messageType}Date">${currentDateTimeFunc(
-        message.date
-      )}</div>
-        </div>`;
+
+      if (message.from === loggedInUser.email && message.status === "seen") {
+        html += `
+          <div class="message ${messageType}">
+            <p>${message.text}</p>
+            <div class="${messageType}Date">${currentDateTimeFunc(
+          message.date
+        )}</div>
+            <div class="${messageType}Status">Seen</div>
+          </div>`;
+      } else {
+        html += `
+          <div class="message ${messageType}">
+            <p>${message.text}</p>
+            <div class="${messageType}Date">${currentDateTimeFunc(
+          message.date
+        )}</div>
+          </div>`;
+      }
     });
   }
   messagesDiv.innerHTML = html;
 
+  // Scroll to the bottom of the messagesDiv
   messagesDiv.scrollTop = messagesDiv.scrollHeight;
 }
-
 // Function to send message
 function sendMessage() {
   const selectedUserEmail = selectedUser.email;
@@ -389,6 +424,7 @@ function sendMessage() {
     to: selectedUserEmail,
     text: text,
     date: new Date().toISOString(),
+    status: "unseen",
   };
 
   let messages = JSON.parse(localStorage.getItem("messages")) || {};
