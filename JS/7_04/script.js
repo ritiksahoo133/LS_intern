@@ -395,45 +395,26 @@ function sendMessage() {
   // then save message to localstorage
   let messages = JSON.parse(localStorage.getItem("messages")) || {};
 
-  // if  conversationid not present
+  // if conversationid not present
   if (!messages[conversationId]) {
     messages[conversationId] = [];
   }
   messages[conversationId].push(message);
-
   localStorage.setItem("messages", JSON.stringify(messages));
+
+  // Update last message time for selected user
+  users[selectedUserEmail].lastMessageTime = new Date().toISOString();
+  localStorage.setItem("users", JSON.stringify(users));
 
   // Clear input
   msgInput.value = "";
   showMessages(selectedUserEmail);
-  showAllUser();
+  showAllUser(selectedUserEmail); // Pass selected user email
 }
 
-// unique conversation id
-function getConversationId(email1, email2) {
-  return [email1, email2].sort().join("-");
-}
-
-// format date in 'date hr:min am/pm' format
-function currentDateTimeFunc(date) {
-  const day = date.getDate();
-  const month = date.toLocaleString("default", { month: "short" });
-  const year = date.getFullYear();
-
-  let hours = date.getHours();
-  const minutes = ("0" + date.getMinutes()).slice(-2);
-  const ampm = hours >= 12 ? "pm" : "am";
-  hours = hours % 12;
-  hours = hours ? hours : 12;
-
-  const formattedDate = `${day} ${month} ${year} ${hours}:${minutes} ${ampm}`;
-  return formattedDate;
-}
-
-//show all users excluding current loggedIn User
+// Show all users excluding current loggedIn User
 function showAllUser() {
   let html = "";
-
   Object.keys(users).forEach((key) => {
     if (key !== loggedInUser.email) {
       const user = users[key];
@@ -442,7 +423,6 @@ function showAllUser() {
       const messages = JSON.parse(localStorage.getItem("messages")) || {};
       const conversationMessages = messages[conversationId] || [];
       const lastMessage = conversationMessages[conversationMessages.length - 1];
-      // console.log(lastMessage);
 
       html += `
         <li class="list-group-item d-flex align-items-center" data-email="${
@@ -464,8 +444,28 @@ function showAllUser() {
   userList.innerHTML = html;
   initializeBackgroundColor(loggedInUser.email);
 }
-
 showAllUser();
+
+// unique conversation id
+function getConversationId(email1, email2) {
+  return [email1, email2].sort().join("-");
+}
+
+// format date in 'date hr:min am/pm' format
+function currentDateTimeFunc(date) {
+  const day = date.getDate();
+  const month = date.toLocaleString("default", { month: "short" });
+  const year = date.getFullYear();
+
+  let hours = date.getHours();
+  const minutes = ("0" + date.getMinutes()).slice(-2);
+  const ampm = hours >= 12 ? "pm" : "am";
+  hours = hours % 12;
+  hours = hours ? hours : 12;
+
+  const formattedDate = `${day} ${month} ${year} ${hours}:${minutes} ${ampm}`;
+  return formattedDate;
+}
 
 function changeBackgroundColor(color) {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
