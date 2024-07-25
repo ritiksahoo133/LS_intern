@@ -352,18 +352,18 @@ function showMessages(selectedUserEmail) {
 
   let html = "";
   if (messages[conversationId]) {
-    // Sort messages
     const sortedMessages = messages[conversationId].sort((a, b) => {
       return new Date(a.date) - new Date(b.date);
     });
-
     sortedMessages.forEach((message) => {
       const messageType =
         message.from === loggedInUser.email ? "sender" : "receiver";
       html += `
         <div class="message ${messageType}">
           <p>${message.text}</p>
-          <div class="${messageType}Date">${message.date}</div>
+          <div class="${messageType}Date">${currentDateTimeFunc(
+        message.date
+      )}</div>
         </div>`;
     });
   }
@@ -384,15 +384,13 @@ function sendMessage() {
   );
   const currentTime = currentDateTimeFunc(new Date());
 
-  // message object
   const message = {
     from: loggedInUser.email,
     to: selectedUserEmail,
     text: text,
-    date: currentTime,
+    date: new Date().toISOString(),
   };
 
-  // then save message to localstorage
   let messages = JSON.parse(localStorage.getItem("messages")) || {};
 
   // if conversationid not present
@@ -402,63 +400,107 @@ function sendMessage() {
   messages[conversationId].push(message);
   localStorage.setItem("messages", JSON.stringify(messages));
 
-  // Update last message time for selected user
   users[selectedUserEmail].lastMessageTime = new Date().toISOString();
+  users[selectedUserEmail].lastMessageText = text;
   localStorage.setItem("users", JSON.stringify(users));
 
-  // Clear input
   msgInput.value = "";
   showMessages(selectedUserEmail);
-  showAllUser(selectedUserEmail); // Pass selected user email
+  showAllUser(selectedUserEmail);
 }
 
-// Show all users excluding current loggedIn User
+// Show all users
 function showAllUser() {
   let html = "";
+  let sortedUsers = [];
+  const messages = JSON.parse(localStorage.getItem("messages")) || {};
+
   Object.keys(users).forEach((key) => {
     if (key !== loggedInUser.email) {
       const user = users[key];
+      const conversationId1 = getConversationId(loggedInUser.email, user.email);
+      const conversationId2 = getConversationId(user.email, loggedInUser.email);
 
-      const conversationId = getConversationId(loggedInUser.email, user.email);
-      const messages = JSON.parse(localStorage.getItem("messages")) || {};
-      const conversationMessages = messages[conversationId] || [];
-      const lastMessage = conversationMessages[conversationMessages.length - 1];
+      const conversationMessages1 = messages[conversationId1] || [];
+      const conversationMessages2 = messages[conversationId2] || [];
+      const allConversationMessages = [
+        ...conversationMessages1,
+        ...conversationMessages2,
+      ];
 
-      html += `
-        <li class="list-group-item d-flex align-items-center" data-email="${
-          user.email
-        }" onclick="selectedUserFunc('${user.email}')">
-          <img src="./images/vecteezy_ai-generated-portrait-of-handsome-smiling-young-man-with_41642170.png" class="userImage">
-          <div>
-            <p class="userName">${user.name}</p>
-            <div class="lastMessageWrapper">
-              <p class="lastMessage">${lastMessage ? lastMessage.text : ""}</p>
-              <span class="lastMessageTime">${
-                lastMessage ? getTime(lastMessage.date) : ""
-              }</span>
-            </div>
-          </div>
-        </li>`;
+      let lastMessageTime = null;
+      let lastMessageText = "";
+      console.log(allConversationMessages);
+      allConversationMessages.forEach((message) => {
+        if (
+          message.from === loggedInUser.email ||
+          message.to === loggedInUser.email
+        ) {
+          if (
+            !lastMessageTime ||
+            new Date(message.date) > new Date(lastMessageTime)
+          ) {
+            lastMessageTime = message.date;
+            lastMessageText = message.text;
+          }
+        }
+      });
+
+      sortedUsers.push({
+        email: user.email,
+        name: user.name,
+        lastMessageTime: lastMessageTime,
+        lastMessageText: lastMessageText,
+      });
     }
   });
+
+  // desceding order
+  sortedUsers.sort((a, b) => {
+    if (!a.lastMessageTime && !b.lastMessageTime) return 0;
+    if (!a.lastMessageTime) return 1;
+    if (!b.lastMessageTime) return -1;
+    return new Date(b.lastMessageTime) - new Date(a.lastMessageTime);
+  });
+
+  sortedUsers.forEach((user) => {
+    html += `
+      <li class="list-group-item d-flex align-items-center" data-email="${
+        user.email
+      }" onclick="selectedUserFunc('${user.email}')">
+        <img src="./images/vecteezy_ai-generated-portrait-of-handsome-smiling-young-man-with_41642170.png" class="userImage">
+        <div>
+          <p class="userName">${user.name}</p>
+          <div class="lastMessageWrapper">
+            <p class="lastMessage">${user.lastMessageText}</p>
+            <span class="lastMessageTime">${
+              user.lastMessageTime ? getTime(user.lastMessageTime) : ""
+            }</span>
+          </div>
+        </div>
+      </li>`;
+  });
+
   userList.innerHTML = html;
   initializeBackgroundColor(loggedInUser.email);
 }
-showAllUser();
 
-// unique conversation id
+showAllUser(selectedUserEmail);
+
+// conversation id
 function getConversationId(email1, email2) {
   return [email1, email2].sort().join("-");
 }
 
-// format date in 'date hr:min am/pm' format
+// format date
 function currentDateTimeFunc(date) {
-  const day = date.getDate();
-  const month = date.toLocaleString("default", { month: "short" });
-  const year = date.getFullYear();
+  const dates = new Date(date);
+  const day = dates.getDate();
+  const month = dates.toLocaleString("default", { month: "short" });
+  const year = dates.getFullYear();
 
-  let hours = date.getHours();
-  const minutes = ("0" + date.getMinutes()).slice(-2);
+  let hours = dates.getHours();
+  const minutes = ("0" + dates.getMinutes()).slice(-2);
   const ampm = hours >= 12 ? "pm" : "am";
   hours = hours % 12;
   hours = hours ? hours : 12;
@@ -488,10 +530,7 @@ function getTime(time) {
   }
   var minutes = date.getMinutes();
   var period = date.getHours() < 12 ? "am" : "pm";
-
-  // Format the time string
   var timeString =
     hours + ":" + (minutes < 10 ? "0" + minutes : minutes) + " " + period;
-  // console.log(timeString);
   return timeString;
 }
