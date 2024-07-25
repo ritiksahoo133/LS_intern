@@ -418,19 +418,13 @@ function showAllUser() {
   Object.keys(users).forEach((key) => {
     if (key !== loggedInUser.email) {
       const user = users[key];
-      const conversationId1 = getConversationId(loggedInUser.email, user.email);
-      const conversationId2 = getConversationId(user.email, loggedInUser.email);
+      const conversationId = getConversationId(loggedInUser.email, user.email);
 
-      const conversationMessages1 = messages[conversationId1] || [];
-      const conversationMessages2 = messages[conversationId2] || [];
-      const allConversationMessages = [
-        ...conversationMessages1,
-        ...conversationMessages2,
-      ];
+      const conversationMessages = messages[conversationId] || [];
+      const allConversationMessages = [...conversationMessages];
 
       let lastMessageTime = null;
       let lastMessageText = "";
-      console.log(allConversationMessages);
       allConversationMessages.forEach((message) => {
         if (
           message.from === loggedInUser.email ||
@@ -457,9 +451,6 @@ function showAllUser() {
 
   // desceding order
   sortedUsers.sort((a, b) => {
-    if (!a.lastMessageTime && !b.lastMessageTime) return 0;
-    if (!a.lastMessageTime) return 1;
-    if (!b.lastMessageTime) return -1;
     return new Date(b.lastMessageTime) - new Date(a.lastMessageTime);
   });
 
