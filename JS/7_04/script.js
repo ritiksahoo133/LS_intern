@@ -385,11 +385,10 @@ function showMessages(selectedUserEmail) {
         html += `
           <div class="message ${messageType}">
             <p>${message.text}</p>
-            <div class="${messageType}Date">${currentDateTimeFunc(
-          message.date
-        )}</div>
          <div class="statusContainer">
-       <div class="${messageType}Status">&#10003;&#10003;</div>
+          <div class="${messageType}Date">${currentDateTimeFunc(
+          message.date
+        )}    <span class="${messageType}Status">&#10003;&#10003;</span></div>
         </div>
             
           </div>`;
