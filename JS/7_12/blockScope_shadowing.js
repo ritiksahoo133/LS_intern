@@ -8,3 +8,12 @@ let b = 120;
   console.log(c);
 }
 console.log(b);
+
+const d = 100;
+{
+  const d = 20;
+  {
+    const d = 200;
+  }
+}
+console.log(d);

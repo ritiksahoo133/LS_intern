@@ -108,4 +108,8 @@ Object.keys(totalQuantity).forEach((productId) => {
 const mostFrequentProduct = products.find(
   (product) => mostFrequentlyOrdered.productId === product.id
 );
-console.log("most frequently ordered product", mostFrequentProduct);
+// console.log("most frequently ordered product", mostFrequentProduct);
+
+let quantityCount = 0;
+
+// console.log(orderItem);
