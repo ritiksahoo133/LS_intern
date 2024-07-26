@@ -345,7 +345,6 @@ function selectedUserFunc(selectedUserEmail) {
   markMessagesAsSeen(selectedUserEmail);
 }
 
-// mark messages as seen as per the loggedIn user
 function markMessagesAsSeen(selectedUserEmail) {
   const messages = JSON.parse(localStorage.getItem("messages")) || {};
   const conversationId = getConversationId(
