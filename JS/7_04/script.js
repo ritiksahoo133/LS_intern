@@ -372,6 +372,7 @@ function showMessages(selectedUserEmail) {
     loggedInUser.email,
     selectedUserEmail
   );
+  let unreadCounts = JSON.parse(localStorage.getItem("unreadCounts")) || {};
 
   let html = "";
   if (messages[conversationId]) {
@@ -389,10 +390,9 @@ function showMessages(selectedUserEmail) {
             <div class="${messageType}Date">${currentDateTimeFunc(
           message.date
         )}</div>
-         <div class="statusContainer">
-       <div class="${messageType}Status">&#10003;&#10003;</div>
-        </div>
-            
+            <div class="statusContainer">
+              <div class="${messageType}Status">&#10003;&#10003;</div>
+            </div>
           </div>`;
       } else {
         html += `
@@ -407,9 +407,16 @@ function showMessages(selectedUserEmail) {
   }
   messagesDiv.innerHTML = html;
 
+  // Reset unread count for this conversation
+  if (unreadCounts[conversationId]) {
+    unreadCounts[conversationId].unreadCount = 0;
+    localStorage.setItem("unreadCounts", JSON.stringify(unreadCounts));
+  }
+
   // Scroll to the bottom of the messagesDiv
   messagesDiv.scrollTop = messagesDiv.scrollHeight;
 }
+
 // Function to send message
 function sendMessage() {
   const selectedUserEmail = selectedUser.email;
@@ -431,13 +438,24 @@ function sendMessage() {
   };
 
   let messages = JSON.parse(localStorage.getItem("messages")) || {};
+  let unreadCounts = JSON.parse(localStorage.getItem("unreadCounts")) || {};
 
-  // if conversationid not present
+  // Update message storage
   if (!messages[conversationId]) {
     messages[conversationId] = [];
   }
   messages[conversationId].push(message);
+
+  if (!unreadCounts[conversationId]) {
+    unreadCounts[conversationId] = { unreadCount: 1 };
+
+    console.log(unreadCounts);
+  } else {
+    unreadCounts[conversationId].unreadCount += 1;
+  }
+
   localStorage.setItem("messages", JSON.stringify(messages));
+  localStorage.setItem("unreadCounts", JSON.stringify(unreadCounts));
 
   users[selectedUserEmail].lastMessageTime = new Date().toISOString();
   users[selectedUserEmail].lastMessageText = text;
@@ -445,7 +463,7 @@ function sendMessage() {
 
   msgInput.value = "";
   showMessages(selectedUserEmail);
-  showAllUser(selectedUserEmail);
+  showAllUser();
 }
 
 // Show all users
@@ -453,6 +471,7 @@ function showAllUser() {
   let html = "";
   let sortedUsers = [];
   const messages = JSON.parse(localStorage.getItem("messages")) || {};
+  const unreadCounts = JSON.parse(localStorage.getItem("unreadCounts")) || {};
 
   Object.keys(users).forEach((key) => {
     if (key !== loggedInUser.email) {
@@ -484,11 +503,12 @@ function showAllUser() {
         name: user.name,
         lastMessageTime: lastMessageTime,
         lastMessageText: lastMessageText,
+        unreadCount: unreadCounts[conversationId]?.unreadCount || 0,
       });
     }
   });
 
-  // desceding order
+  // Descending order
   sortedUsers.sort((a, b) => {
     return new Date(b.lastMessageTime) - new Date(a.lastMessageTime);
   });
@@ -506,6 +526,11 @@ function showAllUser() {
             <span class="lastMessageTime">${
               user.lastMessageTime ? getTime(user.lastMessageTime) : ""
             }</span>
+            ${
+              user.unreadCount > 0
+                ? `<span class="unreadCount">${user.unreadCount}</span>`
+                : ""
+            }
           </div>
         </div>
       </li>`;
